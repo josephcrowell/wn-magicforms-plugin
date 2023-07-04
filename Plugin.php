@@ -1,15 +1,15 @@
 <?php
 
-namespace Martin\Forms;
+namespace JosephCrowell\MagicForms;
 
 use Backend\Facades\Backend;
-use Martin\Forms\Classes\GDPR;
+use JosephCrowell\MagicForms\Classes\GDPR;
 use System\Classes\PluginBase;
-use Martin\Forms\Models\Settings;
+use JosephCrowell\MagicForms\Models\Settings;
 use System\Classes\SettingsManager;
 use Illuminate\Support\Facades\Lang;
-use Martin\Forms\Classes\UnreadRecords;
-use Martin\Forms\Classes\BackendHelpers;
+use JosephCrowell\MagicForms\Classes\UnreadRecords;
+use JosephCrowell\MagicForms\Classes\BackendHelpers;
 use Winter\Storm\Support\Facades\Validator;
 
 class Plugin extends PluginBase
@@ -17,11 +17,14 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'martin.forms::lang.plugin.name',
-            'description' => 'martin.forms::lang.plugin.description',
-            'author'      => 'Martin M.',
+            'name'        => 'josephcrowell.magicforms::lang.plugin.name',
+            'description' => 'josephcrowell.magicforms::lang.plugin.description',
+            'author'      => 'Joseph Crowell',
             'icon'        => 'icon-magic',
-            'homepage'    => 'https://github.com/skydiver/'
+            'homepage'    => 'https://github.com/josephcrowell/wn-magicforms-plugin',
+            'replaces' => [
+                'Martin.MagicForms' => '<=2.0.0'
+            ],
         ];
     }
 
@@ -33,25 +36,25 @@ class Plugin extends PluginBase
 
         return [
             'forms' => [
-                'label'       => 'martin.forms::lang.menu.label',
+                'label'       => 'josephcrowell.magicforms::lang.menu.label',
                 'icon'        => 'icon-magic',
-                'iconSvg'     => 'plugins/martin/forms/assets/imgs/icon.svg',
-                'url'         => BackendHelpers::getBackendURL(['martin.forms.access_records' => 'martin/forms/records', 'martin.forms.access_exports' => 'martin/forms/exports'], 'martin.forms.access_records'),
-                'permissions' => ['martin.forms.*'],
+                'iconSvg'     => 'plugins/josephcrowell/magicforms/assets/imgs/icon.svg',
+                'url'         => BackendHelpers::getBackendURL(['josephcrowell.magicforms.access_records' => 'josephcrowell/magicforms/records', 'josephcrowell.magicforms.access_exports' => 'josephcrowell/magicforms/exports'], 'josephcrowell.magicforms.access_records'),
+                'permissions' => ['josephcrowell.magicforms.*'],
                 'sideMenu' => [
                     'records' => [
-                        'label'        => 'martin.forms::lang.menu.records.label',
+                        'label'        => 'josephcrowell.magicforms::lang.menu.records.label',
                         'icon'         => 'icon-database',
-                        'url'          => Backend::url('martin/forms/records'),
-                        'permissions'  => ['martin.forms.access_records'],
+                        'url'          => Backend::url('josephcrowell/magicforms/records'),
+                        'permissions'  => ['josephcrowell.magicforms.access_records'],
                         'counter'      => UnreadRecords::getTotal(),
                         'counterLabel' => 'Un-Read Messages'
                     ],
                     'exports' => [
-                        'label'       => 'martin.forms::lang.menu.exports.label',
+                        'label'       => 'josephcrowell.magicforms::lang.menu.exports.label',
                         'icon'        => 'icon-download',
-                        'url'         => Backend::url('martin/forms/exports'),
-                        'permissions' => ['martin.forms.access_exports']
+                        'url'         => Backend::url('josephcrowell/magicforms/exports'),
+                        'permissions' => ['josephcrowell.magicforms.access_exports']
                     ],
                 ]
             ]
@@ -62,12 +65,12 @@ class Plugin extends PluginBase
     {
         return [
             'config' => [
-                'label'       => 'martin.forms::lang.menu.label',
-                'description' => 'martin.forms::lang.menu.settings',
+                'label'       => 'josephcrowell.magicforms::lang.menu.label',
+                'description' => 'josephcrowell.magicforms::lang.menu.settings',
                 'category'    => SettingsManager::CATEGORY_CMS,
                 'icon'        => 'icon-magic',
-                'class'       => 'Martin\Forms\Models\Settings',
-                'permissions' => ['martin.forms.access_settings'],
+                'class'       => 'JosephCrowell\MagicForms\Models\Settings',
+                'permissions' => ['josephcrowell.magicforms.access_settings'],
                 'order'       => 500
             ]
         ];
@@ -76,34 +79,34 @@ class Plugin extends PluginBase
     public function registerPermissions()
     {
         return [
-            'martin.forms.access_settings' => ['tab' => 'martin.forms::lang.permissions.tab', 'label' => 'martin.forms::lang.permissions.access_settings'],
-            'martin.forms.access_records'  => ['tab' => 'martin.forms::lang.permissions.tab', 'label' => 'martin.forms::lang.permissions.access_records'],
-            'martin.forms.access_exports'  => ['tab' => 'martin.forms::lang.permissions.tab', 'label' => 'martin.forms::lang.permissions.access_exports'],
-            'martin.forms.gdpr_cleanup'    => ['tab' => 'martin.forms::lang.permissions.tab', 'label' => 'martin.forms::lang.permissions.gdpr_cleanup'],
+            'josephcrowell.magicforms.access_settings' => ['tab' => 'josephcrowell.magicforms::lang.permissions.tab', 'label' => 'josephcrowell.magicforms::lang.permissions.access_settings'],
+            'josephcrowell.magicforms.access_records'  => ['tab' => 'josephcrowell.magicforms::lang.permissions.tab', 'label' => 'josephcrowell.magicforms::lang.permissions.access_records'],
+            'josephcrowell.magicforms.access_exports'  => ['tab' => 'josephcrowell.magicforms::lang.permissions.tab', 'label' => 'josephcrowell.magicforms::lang.permissions.access_exports'],
+            'josephcrowell.magicforms.gdpr_cleanup'    => ['tab' => 'josephcrowell.magicforms::lang.permissions.tab', 'label' => 'josephcrowell.magicforms::lang.permissions.gdpr_cleanup'],
         ];
     }
 
     public function registerComponents()
     {
         return [
-            'Martin\Forms\Components\GenericForm'  => 'genericForm',
-            'Martin\Forms\Components\FilePondForm' => 'filepondForm',
-            'Martin\Forms\Components\EmptyForm'    => 'emptyForm',
+            'JosephCrowell\MagicForms\Components\GenericForm'  => 'genericForm',
+            'JosephCrowell\MagicForms\Components\FilePondForm' => 'filepondForm',
+            'JosephCrowell\MagicForms\Components\EmptyForm'    => 'emptyForm',
         ];
     }
 
     public function registerMailTemplates()
     {
         return [
-            'martin.forms::mail.notification' => Lang::get('martin.forms::lang.mails.form_notification.description'),
-            'martin.forms::mail.autoresponse' => Lang::get('martin.forms::lang.mails.form_autoresponse.description'),
+            'josephcrowell.magicforms::mail.notification' => Lang::get('josephcrowell.magicforms::lang.mails.form_notification.description'),
+            'josephcrowell.magicforms::mail.autoresponse' => Lang::get('josephcrowell.magicforms::lang.mails.form_autoresponse.description'),
         ];
     }
 
     public function register()
     {
         $this->app->resolving('validator', function () {
-            Validator::extend('recaptcha', 'Martin\Forms\Classes\ReCaptchaValidator@validateReCaptcha');
+            Validator::extend('recaptcha', 'JosephCrowell\MagicForms\Classes\ReCaptchaValidator@validateReCaptcha');
         });
     }
 

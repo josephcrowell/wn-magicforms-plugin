@@ -1,16 +1,16 @@
 <?php
 
-namespace Martin\Forms\Components;
+namespace JosephCrowell\MagicForms\Components;
 
-use Martin\Forms\Classes\MagicForm;
+use JosephCrowell\MagicForms\Classes\MagicForm;
 
 class FilePondForm extends MagicForm
 {
     public function componentDetails()
     {
         return [
-            'name'        => 'martin.forms::lang.components.filepond_form.name',
-            'description' => 'martin.forms::lang.components.filepond_form.description',
+            'name'        => 'josephcrowell.magicforms::lang.components.filepond_form.name',
+            'description' => 'josephcrowell.magicforms::lang.components.filepond_form.description',
         ];
     }
 
@@ -18,19 +18,19 @@ class FilePondForm extends MagicForm
     {
         $local = [
             'mail_uploads' => [
-                'title'             => 'martin.forms::lang.components.shared.mail_uploads.title',
-                'description'       => 'martin.forms::lang.components.shared.mail_uploads.description',
+                'title'             => 'josephcrowell.magicforms::lang.components.shared.mail_uploads.title',
+                'description'       => 'josephcrowell.magicforms::lang.components.shared.mail_uploads.description',
                 'type'              => 'checkbox',
                 'default'           => false,
-                'group'             => 'martin.forms::lang.components.shared.group_mail',
+                'group'             => 'josephcrowell.magicforms::lang.components.shared.group_mail',
                 'showExternalParam' => false
             ],
             'uploader_enable' => [
-                'title'             => 'martin.forms::lang.components.shared.uploader_enable.title',
-                'description'       => 'martin.forms::lang.components.shared.uploader_enable.description',
+                'title'             => 'josephcrowell.magicforms::lang.components.shared.uploader_enable.title',
+                'description'       => 'josephcrowell.magicforms::lang.components.shared.uploader_enable.description',
                 'default'           => false,
                 'type'              => 'checkbox',
-                'group'             => 'martin.forms::lang.components.shared.group_uploader',
+                'group'             => 'josephcrowell.magicforms::lang.components.shared.group_uploader',
                 'showExternalParam' => false,
             ],
         ];

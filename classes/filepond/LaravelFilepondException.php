@@ -1,6 +1,6 @@
 <?php
 
-namespace Martin\Forms\Classes\FilePond;
+namespace JosephCrowell\MagicForms\Classes\FilePond;
 
 use Throwable;
 

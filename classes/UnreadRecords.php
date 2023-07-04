@@ -1,15 +1,15 @@
 <?php
 
-namespace Martin\Forms\Classes;
+namespace JosephCrowell\MagicForms\Classes;
 
 use Schema;
-use Martin\Forms\Models\Record;
+use JosephCrowell\MagicForms\Models\Record;
 
 class UnreadRecords
 {
     public static function getTotal()
     {
-        if (Schema::hasTable('martin_forms_records')) {
+        if (Schema::hasTable('josephcrowell_magicforms_records')) {
             $unread = Record::where('unread', 1)->count();
         }
 

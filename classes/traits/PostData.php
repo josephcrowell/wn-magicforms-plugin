@@ -1,8 +1,8 @@
 <?php
 
-namespace Martin\Forms\Classes\Traits;
+namespace JosephCrowell\MagicForms\Classes\Traits;
 
-use Martin\Forms\Classes\BackendHelpers;
+use JosephCrowell\MagicForms\Classes\BackendHelpers;
 
 trait PostData
 {

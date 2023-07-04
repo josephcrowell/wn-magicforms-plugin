@@ -1,9 +1,9 @@
 <?php
 
-namespace Martin\Forms\Classes\Traits;
+namespace JosephCrowell\MagicForms\Classes\Traits;
 
-use Martin\Forms\Classes\BackendHelpers;
-use Martin\Forms\Models\Settings;
+use JosephCrowell\MagicForms\Classes\BackendHelpers;
+use JosephCrowell\MagicForms\Models\Settings;
 use Winter\Translate\Classes\Translator;
 
 trait ReCaptcha

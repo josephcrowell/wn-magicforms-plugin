@@ -1,12 +1,12 @@
 <?php
 
-namespace Martin\Forms\Classes\Mails;
+namespace JosephCrowell\MagicForms\Classes\Mails;
 
-use Martin\Forms\Models\Record;
+use JosephCrowell\MagicForms\Models\Record;
 use System\Models\MailTemplate;
 use Winter\Storm\Database\Collection;
 use Winter\Storm\Support\Facades\Mail;
-use Martin\Forms\Classes\BackendHelpers as BH;
+use JosephCrowell\MagicForms\Classes\BackendHelpers as BH;
 
 class Notification implements Mailable
 {
@@ -97,7 +97,7 @@ class Notification implements Mailable
     {
         return !empty($this->properties['mail_template']) && MailTemplate::findOrMakeTemplate($this->properties['mail_template']) ?
             $this->properties['mail_template'] :
-            'martin.forms::mail.notification';
+            'josephcrowell.magicforms::mail.notification';
     }
 
     public function prepareCustomSubject()

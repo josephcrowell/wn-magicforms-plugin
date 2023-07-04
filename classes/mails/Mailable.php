@@ -1,6 +1,6 @@
 <?php
 
-namespace Martin\Forms\Classes\Mails;
+namespace JosephCrowell\MagicForms\Classes\Mails;
 
 interface Mailable
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Martin\Forms\Classes;
+namespace JosephCrowell\MagicForms\Classes;
 
 use Flash;
 use Carbon\Carbon;
-use Martin\Forms\Models\Record;
-use Martin\Forms\Models\Settings;
+use JosephCrowell\MagicForms\Models\Record;
+use JosephCrowell\MagicForms\Models\Settings;
 
 class GDPR
 {
@@ -15,7 +15,7 @@ class GDPR
         $gdpr_days   = Settings::get('gdpr_days', false);
 
         if (!$gdpr_enable) {
-            Flash::error(e(trans('martin.forms::lang.classes.GDPR.alert_gdpr_disabled')));
+            Flash::error(e(trans('josephcrowell.magicforms::lang.classes.GDPR.alert_gdpr_disabled')));
             return;
         }
 
@@ -25,6 +25,6 @@ class GDPR
             return $rows;
         }
 
-        Flash::error(e(trans('martin.forms::lang.classes.GDPR.alert_invalid_gdpr')));
+        Flash::error(e(trans('josephcrowell.magicforms::lang.classes.GDPR.alert_invalid_gdpr')));
     }
 }

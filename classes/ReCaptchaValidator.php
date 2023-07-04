@@ -1,8 +1,8 @@
 <?php
 
-namespace Martin\Forms\Classes;
+namespace JosephCrowell\MagicForms\Classes;
 
-use Martin\Forms\Models\Settings;
+use JosephCrowell\MagicForms\Models\Settings;
 use Illuminate\Support\Facades\Request;
 
 class ReCaptchaValidator

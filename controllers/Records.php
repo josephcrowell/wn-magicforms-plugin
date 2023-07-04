@@ -1,15 +1,15 @@
 <?php
 
-namespace Martin\Forms\Controllers;
+namespace JosephCrowell\MagicForms\Controllers;
 
 use Backend\Facades\Backend;
-use Martin\Forms\Classes\GDPR;
+use JosephCrowell\MagicForms\Classes\GDPR;
 use Backend\Classes\Controller;
-use Martin\Forms\Models\Record;
+use JosephCrowell\MagicForms\Models\Record;
 use Backend\Facades\BackendMenu;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Lang;
-use Martin\Forms\Classes\UnreadRecords;
+use JosephCrowell\MagicForms\Classes\UnreadRecords;
 use Winter\Storm\Support\Facades\Flash;
 use Illuminate\Support\Facades\Redirect;
 
@@ -21,12 +21,12 @@ class Records extends Controller
 
     public $listConfig = 'config_list.yaml';
 
-    public $requiredPermissions = ['martin.forms.access_records'];
+    public $requiredPermissions = ['josephcrowell.magicforms.access_records'];
 
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Martin.Forms', 'forms', 'records');
+        BackendMenu::setContext('josephcrowell.magicforms', 'forms', 'records');
     }
 
     public function view($id)
@@ -34,14 +34,14 @@ class Records extends Controller
         $record = Record::find($id);
 
         if (!$record) {
-            Flash::error(e(trans('martin.forms::lang.controllers.records.error')));
-            return Redirect::to(Backend::url('martin/forms/records'));
+            Flash::error(e(trans('josephcrowell.magicforms::lang.controllers.records.error')));
+            return Redirect::to(Backend::url('josephcrowell/magicforms/records'));
         }
 
         $record->unread = false;
         $record->save();
-        $this->addCss('/plugins/martin/forms/assets/css/records.css');
-        $this->pageTitle      = e(trans('martin.forms::lang.controllers.records.view_title'));
+        $this->addCss('/plugins/josephcrowell/magicforms/assets/css/records.css');
+        $this->pageTitle      = e(trans('josephcrowell.magicforms::lang.controllers.records.view_title'));
         $this->vars['record'] = $record;
     }
 
@@ -66,12 +66,12 @@ class Records extends Controller
 
         if ($record) {
             $record->delete();
-            Flash::success(e(trans('martin.forms::lang.controllers.records.deleted')));
+            Flash::success(e(trans('josephcrowell.magicforms::lang.controllers.records.deleted')));
         } else {
-            Flash::error(e(trans('martin.forms::lang.controllers.records.error')));
+            Flash::error(e(trans('josephcrowell.magicforms::lang.controllers.records.error')));
         }
 
-        return Redirect::to(Backend::url('martin/forms/records'));
+        return Redirect::to(Backend::url('josephcrowell/magicforms/records'));
     }
 
     public function download($record_id, $file_id)
@@ -111,11 +111,11 @@ class Records extends Controller
 
     public function onGDPRClean()
     {
-        if ($this->user->hasPermission(['martin.forms.gdpr_cleanup'])) {
+        if ($this->user->hasPermission(['josephcrowell.magicforms.gdpr_cleanup'])) {
             GDPR::cleanRecords();
-            Flash::success(e(trans('martin.forms::lang.controllers.records.alerts.gdpr_success')));
+            Flash::success(e(trans('josephcrowell.magicforms::lang.controllers.records.alerts.gdpr_success')));
         } else {
-            Flash::error(e(trans('martin.forms::lang.controllers.records.alerts.gdpr_perms')));
+            Flash::error(e(trans('josephcrowell.magicforms::lang.controllers.records.alerts.gdpr_perms')));
         }
 
         $counter = UnreadRecords::getTotal();

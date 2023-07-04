@@ -1,14 +1,14 @@
 <?php
 
-namespace Martin\Forms\Tests\Classes;
+namespace JosephCrowell\MagicForms\Tests\Classes;
 
 use PluginTestCase;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use System\Classes\PluginManager;
-use Martin\Forms\Classes\GDPR;
-use Martin\Forms\Models\Record;
-use Martin\Forms\Models\Settings;
+use JosephCrowell\MagicForms\Classes\GDPR;
+use JosephCrowell\MagicForms\Models\Record;
+use JosephCrowell\MagicForms\Models\Settings;
 
 class GDPRTest extends PluginTestCase {
 

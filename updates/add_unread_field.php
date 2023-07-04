@@ -1,23 +1,24 @@
 <?php
 
-namespace Martin\Forms\Updates;
+namespace JosephCrowell\MagicForms\Updates;
 
 use Winter\Storm\Support\Facades\Schema;
 use Winter\Storm\Database\Updates\Migration;
-use Martin\Forms\Models\Record;
+use JosephCrowell\MagicForms\Models\Record;
 
 class AddUnreadField extends Migration
 {
     public function up()
     {
+        if (!Schema::hasColumn('martin_forms_records', 'unread')) {
+            // CREATE FIELD
+            Schema::table('martin_forms_records', function ($table) {
+                $table->boolean('unread')->default(1)->after('ip');
+            });
 
-        // CREATE FIELD
-        Schema::table('martin_forms_records', function ($table) {
-            $table->boolean('unread')->default(1)->after('ip');
-        });
-
-        // UPDATE EXISTING RECORDS TO READED
-        Record::where('unread', 1)->update(['unread' => 0]);
+            // UPDATE EXISTING RECORDS TO READED
+            Record::where('unread', 1)->update(['unread' => 0]);
+        }
     }
 
     public function down()

@@ -1,12 +1,12 @@
 <?php
 
-namespace Martin\Forms\Tests\Classes;
+namespace JosephCrowell\MagicForms\Tests\Classes;
 
 use PluginTestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use System\Classes\PluginManager;
-use Martin\Forms\Classes\UnreadRecords;
-use Martin\Forms\Models\Record;
+use JosephCrowell\MagicForms\Classes\UnreadRecords;
+use JosephCrowell\MagicForms\Models\Record;
 
 class UnreadRecordsTest extends PluginTestCase {
 

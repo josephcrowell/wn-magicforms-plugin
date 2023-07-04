@@ -96,7 +96,7 @@
                 'mail_recipients'   => ['title' => 'Ontvangers'                   , 'description' => 'Geef de e-mailadressen op (één adres per regel)'],
                 'mail_bcc'          => ['title' => 'BCC'                          , 'description' => 'Stuur een BBC naar de ontvangers (één adres per regel)'],
                 'mail_replyto'      => ['title' => 'ReplyTo E-mail Veld'          , 'description' => 'Formulierveld met het e-mailadres van de afzender dat moet worden gebruikt als "ReplyTo"'],
-                'mail_template'     => ['title' => 'E-mail sjabloon'              , 'description' => 'Gebruik een aangepast e-mail sjabloon. Specificeer sjabloon code zoals "martin.forms::mail.notification" (te vinden onder Instellingen, E-mail sjablonen). Laat leeg om de standaard te gebruiken.'],
+                'mail_template'     => ['title' => 'E-mail sjabloon'              , 'description' => 'Gebruik een aangepast e-mail sjabloon. Specificeer sjabloon code zoals "josephcrowell.magicforms::mail.notification" (te vinden onder Instellingen, E-mail sjablonen). Laat leeg om de standaard te gebruiken.'],
                 'mail_uploads'      => ['title' => 'Verstuur uploads'             , 'description' => 'Verstuur uploads als bijlagen'],
                 'mail_resp_enabled' => ['title' => 'Stuur automatisch antwoord'   , 'description' => 'Stuur een automatische e-mail naar de persoon die het formulier heeft ingediend'],
                 'mail_resp_field'   => ['title' => 'E-mail Veld'                  , 'description' => 'Formulierveld met het e-mailadres van de ontvanger van het automatische antwoord'],

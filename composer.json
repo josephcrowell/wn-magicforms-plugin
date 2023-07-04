@@ -1,7 +1,8 @@
 {
-    "name": "martin/wn-forms-plugin",
+    "name": "josephcrowell/wn-magicforms-plugin",
     "type": "winter-plugin",
     "description": "Create easy (and almost magic) AJAX forms",
+    "homepage": "https://github.com/josephcrowell/wn-magicforms-plugin",
     "keywords": [
         "winter",
         "cms",
@@ -12,6 +13,28 @@
         "magic forms",
         "recaptcha"
     ],
-    "homepage": "https://github.com/skydiver/wn-magic-forms/",
-    "license": "MIT"
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin M.",
+            "email": "skydiver@users.github.com",
+            "role": "Original Author"
+        },
+        {
+            "name": "Joseph Crowell",
+            "email": "joseph.w.crowell@gmail.com",
+            "role": "Author"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/josephcrowell/wn-magicforms-plugin/issues",
+        "source": "https://github.com/josephcrowell/wn-magicforms-plugin"
+    },
+    "require": {
+        "php": ">=7.2",
+        "composer/installers": "~1.0"
+    },
+    "replace": {
+        "martin/wn-forms-plugin": "~2.0"
+    }
 }

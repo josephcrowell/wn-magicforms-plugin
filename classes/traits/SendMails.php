@@ -1,10 +1,10 @@
 <?php
 
-namespace Martin\Forms\Classes\Traits;
+namespace JosephCrowell\MagicForms\Classes\Traits;
 
 use Illuminate\Support\Facades\App;
-use Martin\Forms\Classes\Mails\AutoResponse;
-use Martin\Forms\Classes\Mails\Notification;
+use JosephCrowell\MagicForms\Classes\Mails\AutoResponse;
+use JosephCrowell\MagicForms\Classes\Mails\Notification;
 
 trait SendMails
 {

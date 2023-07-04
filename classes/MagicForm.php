@@ -1,33 +1,33 @@
 <?php
 
-namespace Martin\Forms\Classes;
+namespace JosephCrowell\MagicForms\Classes;
 
 use Cms\Classes\ComponentBase;
-use Martin\Forms\Models\Record;
-use Martin\Forms\Models\Settings;
+use JosephCrowell\MagicForms\Models\Record;
+use JosephCrowell\MagicForms\Models\Settings;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
-use Martin\Forms\Classes\BackendHelpers;
+use JosephCrowell\MagicForms\Classes\BackendHelpers;
 use Winter\Storm\Support\Facades\Config;
 use Winter\Storm\Exception\AjaxException;
-use Martin\Forms\Classes\FilePond\FilePond;
+use JosephCrowell\MagicForms\Classes\FilePond\FilePond;
 use Winter\Storm\Support\Facades\Validator;
-use Martin\Forms\Classes\Mails\AutoResponse;
-use Martin\Forms\Classes\Mails\Notification;
+use JosephCrowell\MagicForms\Classes\Mails\AutoResponse;
+use JosephCrowell\MagicForms\Classes\Mails\Notification;
 use Winter\Storm\Exception\ValidationException;
 
 abstract class MagicForm extends ComponentBase
 {
 
-    use \Martin\Forms\Classes\Traits\PostData;
-    use \Martin\Forms\Classes\Traits\ReCaptcha;
-    use \Martin\Forms\Classes\Traits\RequestValidation;
-    use \Martin\Forms\Classes\Traits\SendMails;
-    use \Martin\Forms\Classes\Traits\SharedProperties;
+    use \JosephCrowell\MagicForms\Classes\Traits\PostData;
+    use \JosephCrowell\MagicForms\Classes\Traits\ReCaptcha;
+    use \JosephCrowell\MagicForms\Classes\Traits\RequestValidation;
+    use \JosephCrowell\MagicForms\Classes\Traits\SendMails;
+    use \JosephCrowell\MagicForms\Classes\Traits\SharedProperties;
 
     private $flash_partial;
     private $validator;
@@ -52,7 +52,7 @@ abstract class MagicForm extends ComponentBase
         }
 
         if ($this->isReCaptchaMisconfigured()) {
-            $this->page['recaptcha_warn'] = Lang::get('martin.forms::lang.components.shared.recaptcha_warn');
+            $this->page['recaptcha_warn'] = Lang::get('josephcrowell.magicforms::lang.components.shared.recaptcha_warn');
         }
 
         if ($this->property('inline_errors') == 'display') {
@@ -120,7 +120,7 @@ abstract class MagicForm extends ComponentBase
         unset($post['_token'], $post['g-recaptcha-response'], $post['_session_key'], $post['files']);
 
         /** FIRE BEFORE SAVE EVENT */
-        Event::fire('martin.forms.beforeSaveRecord', [&$post, $this]);
+        Event::fire('josephcrowell.magicforms.beforeSaveRecord', [&$post, $this]);
 
         if (count($custom_attributes)) {
             $post = collect($post)->mapWithKeys(function ($val, $key) use ($custom_attributes) {
@@ -149,7 +149,7 @@ abstract class MagicForm extends ComponentBase
         $this->sendEmails($post, $record);
 
         /** FIRE AFTER SAVE EVENT */
-        Event::fire('martin.forms.afterSaveRecord', [&$post, $this, $record]);
+        Event::fire('josephcrowell.magicforms.afterSaveRecord', [&$post, $this, $record]);
 
         // CHECK FOR REDIRECT
         if ($this->property('redirect')) {

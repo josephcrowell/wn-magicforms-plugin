@@ -1,9 +1,9 @@
 <?php
 
-namespace Martin\Forms\Classes\FilePond;
+namespace JosephCrowell\MagicForms\Classes\FilePond;
 
 use Illuminate\Http\Request;
-use Martin\Forms\Models\Settings;
+use JosephCrowell\MagicForms\Models\Settings;
 use Illuminate\Support\Facades\Response;
 use Winter\Storm\Filesystem\Definitions;
 use Winter\Storm\Support\Facades\Validator;
@@ -42,7 +42,7 @@ class FilePondController extends BaseController
 
         /** VALIDATE UPLOAD FILE SIZE */
         if ($this->checkInvalidSize()) {
-            $error = e(trans('martin.forms::lang.classes.FilePond.error_filesize'));
+            $error = e(trans('josephcrowell.magicforms::lang.classes.FilePond.error_filesize'));
             return Response::make($error, 422, [
                 'Content-Type' => 'text/plain',
             ]);
@@ -50,7 +50,7 @@ class FilePondController extends BaseController
 
         /** VALIDATE UPLOAD FILE TYPE */
         if ($this->checkInvalidFile()) {
-            $error = e(trans('martin.forms::lang.classes.FilePond.error_filetype'));
+            $error = e(trans('josephcrowell.magicforms::lang.classes.FilePond.error_filetype'));
             return Response::make($error, 422, [
                 'Content-Type' => 'text/plain',
             ]);
@@ -66,7 +66,7 @@ class FilePondController extends BaseController
         $filePathParts = pathinfo($filePath);
 
         if (!$this->file->move($filePathParts['dirname'], $filePathParts['basename'])) {
-            $error = e(trans('martin.forms::lang.classes.FilePond.error_savefile'));
+            $error = e(trans('josephcrowell.magicforms::lang.classes.FilePond.error_savefile'));
             return Response::make($error, 500, [
                 'Content-Type' => 'text/plain',
             ]);

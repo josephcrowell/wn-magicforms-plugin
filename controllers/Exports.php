@@ -1,17 +1,17 @@
 <?php
 
-namespace Martin\Forms\Controllers;
+namespace JosephCrowell\MagicForms\Controllers;
 
 use SplTempFileObject;
 use League\Csv\AbstractCsv;
 use Backend\Classes\Controller;
-use Martin\Forms\Models\Record;
+use JosephCrowell\MagicForms\Models\Record;
 use Backend\Facades\BackendMenu;
 use League\Csv\Writer as CsvWriter;
 
 class Exports extends Controller
 {
-    public $requiredPermissions = ['martin.forms.access_exports'];
+    public $requiredPermissions = ['josephcrowell.magicforms.access_exports'];
 
     public $implement = [
         'Backend.Behaviors.FormController',
@@ -22,12 +22,12 @@ class Exports extends Controller
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Martin.Forms', 'forms', 'exports');
+        BackendMenu::setContext('josephcrowell.magicforms', 'forms', 'exports');
     }
 
     public function index()
     {
-        $this->pageTitle = e(trans('martin.forms::lang.controllers.exports.title'));
+        $this->pageTitle = e(trans('josephcrowell.magicforms::lang.controllers.exports.title'));
         $this->create('frontend');
     }
 
@@ -75,10 +75,10 @@ class Exports extends Controller
         // METADATA HEADERS
         if (post('Record.options_metadata')) {
             $meta_headers = [
-                e(trans('martin.forms::lang.controllers.records.columns.id')),
-                e(trans('martin.forms::lang.controllers.records.columns.group')),
-                e(trans('martin.forms::lang.controllers.records.columns.ip')),
-                e(trans('martin.forms::lang.controllers.records.columns.created_at')),
+                e(trans('josephcrowell.magicforms::lang.controllers.records.columns.id')),
+                e(trans('josephcrowell.magicforms::lang.controllers.records.columns.group')),
+                e(trans('josephcrowell.magicforms::lang.controllers.records.columns.ip')),
+                e(trans('josephcrowell.magicforms::lang.controllers.records.columns.created_at')),
             ];
             $headers = array_merge($meta_headers, $headers);
         }
@@ -92,7 +92,7 @@ class Exports extends Controller
 
         // ADD FILES HEADER
         if (post('Record.options_files')) {
-            $headers[] = e(trans('martin.forms::lang.controllers.records.columns.files'));
+            $headers[] = e(trans('josephcrowell.magicforms::lang.controllers.records.columns.files'));
         }
 
         // ADD HEADERS

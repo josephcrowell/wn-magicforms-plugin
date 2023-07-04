@@ -1,6 +1,6 @@
 <?php
 
-namespace Martin\Forms\Classes\FilePond;
+namespace JosephCrowell\MagicForms\Classes\FilePond;
 
 class InvalidPathException extends \InvalidArgumentException implements LaravelFilePondException
 {

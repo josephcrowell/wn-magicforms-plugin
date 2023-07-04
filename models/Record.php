@@ -1,6 +1,6 @@
 <?php
 
-namespace Martin\Forms\Models;
+namespace JosephCrowell\MagicForms\Models;
 
 use Backend\Facades\Backend;
 use Winter\Storm\Database\Model;
@@ -9,7 +9,7 @@ class Record extends Model
 {
     use \Winter\Storm\Database\Traits\SoftDelete;
 
-    public $table = 'martin_forms_records';
+    public $table = 'josephcrowell_magicforms_records';
 
     protected $dates = ['deleted_at'];
 
@@ -35,7 +35,7 @@ class Record extends Model
     public function filesList()
     {
         return $this->files->map(function ($file) {
-            return Backend::url('martin/forms/records/download', [$this->id, $file->id]);
+            return Backend::url('josephcrowell/magicforms/records/download', [$this->id, $file->id]);
         })->implode(',');
     }
 }
