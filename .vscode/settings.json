@@ -1,0 +1,27 @@
+{
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+    "cSpell.words": [],
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "files.removeFinalNewlines": true
+    },
+    "[php]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[wintercms-twig]": {
+        "editor.formatOnSave": false,
+        "files.insertFinalNewline": false,
+        "files.trimTrailingWhitespace": true,
+        "files.removeFinalNewlines": true
+    },
+    "prettier.printWidth": 120,
+    "prettier.jsxSingleQuote": true,
+    "prettier.singleQuote": true,
+    "prettier.tabWidth": 4,
+    "prettier.bracketSameLine": true
+}
