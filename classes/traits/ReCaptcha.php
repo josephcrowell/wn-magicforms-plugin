@@ -37,7 +37,7 @@ trait ReCaptcha
 
     private function getReCaptchaLang($lang = '')
     {
-        if (BackendHelpers::isTranslatePlugin()) {
+        if (BackendHelpers::isTranslatePlugin() && $this->translator) {
             $lang = '&hl=' . $this->activeLocale = $this->translator->getLocale();
         } else {
             $lang = '&hl=' . $this->activeLocale = app()->getLocale();
