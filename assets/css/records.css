@@ -1,4 +1,4 @@
-.files-container ul              { padding:0; list-style:none; }
+.files-container ul { padding:0; list-style:none; }
 
 .record-table    { width:100%; border-collapse:collapse; box-shadow:5px 5px 10px #AAA; }
 .record-table td { padding:10px; border:solid 1px #D4D8DA; }
