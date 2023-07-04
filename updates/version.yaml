@@ -130,3 +130,11 @@
   - added dutch translation [thanks to rubenvanerk]
 2.0.0:
   - new AJAX upload component using Filepond
+2.1.0:
+  - convert recaptcha to vanilla js (thanks to Marc Jauvin)
+  - various fixes in BackgroundHelpers.php (thanks to ArtemisMir)
+  - fix replyto not working in Notification.php (thanks to cemik)
+  - fix classes not found due to upper case folder names (thanks to McGonigleDevOps)
+  - change to magic wand icon
+  - fix error when exporting and no records exist (thanks to blakej115)
+  - fix install prevented because records table doesn't exist (thanks to blakej115)
