@@ -86,7 +86,9 @@ class Exports extends Controller
         // ADD STORED FIELDS AS HEADER ROW IN CSV
         $filteredRecords = $records->get();
         $record = $filteredRecords->first();
-        $headers = array_merge($headers, array_keys($record->form_data_arr));
+        if (isset($record)) {
+            $headers = array_merge($headers, array_keys($record->form_data_arr));
+        }
 
         // ADD FILES HEADER
         if (post('Record.options_files')) {
