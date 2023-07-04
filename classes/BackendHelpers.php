@@ -100,7 +100,7 @@ class BackendHelpers
      */
     public static function replaceToken(string $pattern, string $replacement = null, string $subject): string
     {
-        $pattern = '/{{\s*(' . $pattern . ')\s*}}/';
+        $pattern = '/{{\s*('.preg_quote($pattern, '/').')\s*}}/';
         return preg_replace($pattern, $replacement, $subject);
     }
 }
