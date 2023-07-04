@@ -20,7 +20,7 @@ class Plugin extends PluginBase
             'name'        => 'martin.forms::lang.plugin.name',
             'description' => 'martin.forms::lang.plugin.description',
             'author'      => 'Martin M.',
-            'icon'        => 'icon-bolt',
+            'icon'        => 'icon-magic',
             'homepage'    => 'https://github.com/skydiver/'
         ];
     }
@@ -34,7 +34,7 @@ class Plugin extends PluginBase
         return [
             'forms' => [
                 'label'       => 'martin.forms::lang.menu.label',
-                'icon'        => 'icon-bolt',
+                'icon'        => 'icon-magic',
                 'iconSvg'     => 'plugins/martin/forms/assets/imgs/icon.svg',
                 'url'         => BackendHelpers::getBackendURL(['martin.forms.access_records' => 'martin/forms/records', 'martin.forms.access_exports' => 'martin/forms/exports'], 'martin.forms.access_records'),
                 'permissions' => ['martin.forms.*'],
@@ -65,7 +65,7 @@ class Plugin extends PluginBase
                 'label'       => 'martin.forms::lang.menu.label',
                 'description' => 'martin.forms::lang.menu.settings',
                 'category'    => SettingsManager::CATEGORY_CMS,
-                'icon'        => 'icon-bolt',
+                'icon'        => 'icon-magic',
                 'class'       => 'Martin\Forms\Models\Settings',
                 'permissions' => ['martin.forms.access_settings'],
                 'order'       => 500
