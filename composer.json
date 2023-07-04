@@ -5,9 +5,12 @@
     "keywords": [
         "winter",
         "cms",
+        "wintercms",
         "plugin",
+        "form",
         "forms",
-        "magic forms"
+        "magic forms",
+        "recaptcha"
     ],
     "homepage": "https://github.com/skydiver/wn-magic-forms/",
     "license": "MIT"
