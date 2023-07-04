@@ -3,7 +3,7 @@
     <?php
         echo $this->makePartial('$/martin/forms/controllers/records/partials/_action_button.htm', [
             'type'            => 'danger',
-            'icon'            => 'oc-icon-trash',
+            'icon'            => 'wn-icon-trash',
             'label'           => e(trans('backend::lang.list.delete_selected')),
             'onclick'         => "$(this).data('request-data', { checked: $('.control-list').listWidget('getChecked') })",
             'needs_selected'  => true,
@@ -26,7 +26,7 @@
     <?php
         echo $this->makePartial('$/martin/forms/controllers/records/partials/_action_button.htm', [
             'type'            => 'default',
-            'icon'            => 'oc-icon-eye-slash',
+            'icon'            => 'wn-icon-eye-slash',
             'label'           => e(trans('martin.forms::lang.controllers.records.buttons.unread')),
             'onclick'         => "$(this).data('request-data', { state: 'unread', checked: $('.control-list').listWidget('getChecked') })",
             'needs_selected'  => true,
@@ -41,7 +41,7 @@
 
         echo $this->makePartial('$/martin/forms/controllers/records/partials/_action_button.htm', [
             'type'            => 'default',
-            'icon'            => 'oc-icon-eye',
+            'icon'            => 'wn-icon-eye',
             'label'           => e(trans('martin.forms::lang.controllers.records.buttons.read')),
             'onclick'         => "$(this).data('request-data', { state: 'read', checked: $('.control-list').listWidget('getChecked') })",
             'needs_selected'  => true,
@@ -60,7 +60,7 @@
         if(Martin\Forms\Models\Settings::get('gdpr_enable')) {
             echo $this->makePartial('$/martin/forms/controllers/records/partials/_action_button.htm', [
                 'type'            => 'danger',
-                'icon'            => 'oc-icon-history',
+                'icon'            => 'wn-icon-history',
                 'label'           => e(trans('martin.forms::lang.controllers.records.buttons.gdpr_clean')),
                 'request'         => 'onGDPRClean',
                 'request_confirm' => e(trans('martin.forms::lang.controllers.records.alerts.gdpr_confirm')),
