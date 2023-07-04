@@ -1,0 +1,6 @@
+node_modules
+*.bak
+*.log
+/*.lock
+/package-lock.json
+.VSCodeCounter
