@@ -70,8 +70,8 @@ class Notification implements Mailable
             }
 
             // ADD REPLY TO ADDRESS
-            if (!empty($this->properties['mail_replyto'])) {
-                $message->replyTo($this->properties['mail_replyto']);
+            if (!empty($this->properties['mail_replyto']) && !empty($this->post[$this->properties['mail_replyto']])) {
+                $message->replyTo($this->post[$this->properties['mail_replyto']]);
             }
 
             // ADD UPLOADS
