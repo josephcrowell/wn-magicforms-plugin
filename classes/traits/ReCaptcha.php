@@ -4,12 +4,12 @@ namespace Martin\Forms\Classes\Traits;
 
 use Martin\Forms\Classes\BackendHelpers;
 use Martin\Forms\Models\Settings;
-use RainLab\Translate\Classes\Translator;
+use Winter\Translate\Classes\Translator;
 
 trait ReCaptcha
 {
     /**
-     * @var RainLab\Translate\Classes\Translator Translator object.
+     * @var Winter\Translate\Classes\Translator Translator object.
      */
     protected $translator;
 

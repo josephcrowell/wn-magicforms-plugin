@@ -48,7 +48,7 @@ trait RequestValidation
 
         /** TRANSLATE ERROR MESSAGE */
         if (BackendHelpers::isTranslatePlugin()) {
-            $message = \RainLab\Translate\Models\Message::trans($message);
+            $message = \Winter\Translate\Models\Message::trans($message);
         }
 
         /** RETURN VALIDATOR OBJECT IF INLINE ERRORS ARE ENABLED */

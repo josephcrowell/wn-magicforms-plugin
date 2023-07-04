@@ -75,10 +75,10 @@ abstract class MagicForm extends ComponentBase
 
         // LOAD TRANSLATOR PLUGIN
         if (BackendHelpers::isTranslatePlugin()) {
-            $translator = \RainLab\Translate\Classes\Translator::instance();
+            $translator = \Winter\Translate\Classes\Translator::instance();
             $translator->loadLocaleFromSession();
             $locale = $translator->getLocale();
-            \RainLab\Translate\Models\Message::setContext($locale);
+            \Winter\Translate\Models\Message::setContext($locale);
         }
 
         /** PREPARE FORM DATA */
@@ -92,7 +92,7 @@ abstract class MagicForm extends ComponentBase
         // TRANSLATE CUSTOM ERROR MESSAGES
         if (BackendHelpers::isTranslatePlugin()) {
             foreach ($msgs as $rule => $msg) {
-                $msgs[$rule] = \RainLab\Translate\Models\Message::trans($msg);
+                $msgs[$rule] = \Winter\Translate\Models\Message::trans($msg);
             }
         }
 
@@ -161,7 +161,7 @@ abstract class MagicForm extends ComponentBase
 
         // LOOK FOR TRANSLATION
         if (BackendHelpers::isTranslatePlugin()) {
-            $message = \RainLab\Translate\Models\Message::trans($message);
+            $message = \Winter\Translate\Models\Message::trans($message);
         }
 
         // DISPLAY SUCCESS MESSAGE
