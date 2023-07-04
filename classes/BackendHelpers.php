@@ -33,7 +33,7 @@ class BackendHelpers
      */
     public static function isTranslatePlugin(): bool
     {
-        return class_exists('\RainLab\Translate\Classes\Translator') && class_exists('\RainLab\Translate\Models\Message');
+        return class_exists('\Winter\Translate\Classes\Translator') && class_exists('\Winter\Translate\Models\Message') && class_exists('\Winter\Translate\Models\Locale');
     }
 
     /**
