@@ -9,21 +9,9 @@ use Winter\Translate\Classes\Translator;
 trait ReCaptcha
 {
     /**
-     * @var Winter\Translate\Classes\Translator Translator object.
-     */
-    protected $translator;
-
-    /**
      * @var string The active locale code.
      */
     public $activeLocale;
-
-    public function init()
-    {
-        if (BackendHelpers::isTranslatePlugin()) {
-            $this->translator = Translator::instance();
-        }
-    }
 
     private function isReCaptchaEnabled()
     {
@@ -37,8 +25,8 @@ trait ReCaptcha
 
     private function getReCaptchaLang($lang = '')
     {
-        if (BackendHelpers::isTranslatePlugin() && $this->translator) {
-            $lang = '&hl=' . $this->activeLocale = $this->translator->getLocale();
+        if (BackendHelpers::isTranslatePlugin()) {
+            $lang = '&hl=' . $this->activeLocale = Translator::instance()->getLocale();
         } else {
             $lang = '&hl=' . $this->activeLocale = app()->getLocale();
         }

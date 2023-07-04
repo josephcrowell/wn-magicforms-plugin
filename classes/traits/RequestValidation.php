@@ -46,10 +46,10 @@ trait RequestValidation
         /** GET DEFAULT ERROR MESSAGE */
         $message = $this->property('messages_errors');
 
-        /** TRANSLATE ERROR MESSAGE
+        /** TRANSLATE ERROR MESSAGE */
         if (BackendHelpers::isTranslatePlugin()) {
             $message = \Winter\Translate\Models\Message::trans($message);
-        } */
+        }
 
         /** RETURN VALIDATOR OBJECT IF INLINE ERRORS ARE ENABLED */
         if ($this->property('inline_errors') == 'display') {
