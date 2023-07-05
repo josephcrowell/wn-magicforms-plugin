@@ -141,3 +141,5 @@
 3.0.0:
   - fork and change plugin namespace to maintain and ensure pull requests are merged
   - rename_tables.php
+3.0.1:
+  - add form id to forms using component alias so event listeners can be added

@@ -6,7 +6,7 @@
     </div>
 {% endif %}
 
-{{ form_ajax(__SELF__ ~ '::onFormSubmit') }}
+{{ form_ajax(__SELF__ ~ '::onFormSubmit', { id: __SELF__ }) }}
 
     <div id="{{ __SELF__ }}_forms_flash"></div>
 
