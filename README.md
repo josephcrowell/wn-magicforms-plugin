@@ -1,5 +1,6 @@
 ![](https://banners.beyondco.de/Magic%20Forms%20for%20WinterCMS.png?theme=light&packageManager=composer+require&packageName=josephcrowell%2Fwn-forms-plugin&pattern=architect&style=style_1&description=Create+easy+%28and+almost+magic%29+forms&md=1&showWatermark=0&fontSize=100px&images=magic)
 
+This plugin is a fork of [Martin.Forms](https://github.com/skydiver/wn-forms-plugin).
 
 ## Why Magic Forms?
 Almost everyday we do forms for our clients, personal projects, etc
@@ -7,7 +8,6 @@ Almost everyday we do forms for our clients, personal projects, etc
 Sometimes we need to add or remove fields, change validations, store data and at some point, this can be boring and repetitive.
 
 So, the objective was to find a way to just put the HTML elements on the page, skip the repetitive task of coding and (with some kind of magic) store this data on a database or send by mail.
-
 
 ## Features
 * Create any type of form: contact, feedback, registration, uploads, etc
@@ -25,7 +25,6 @@ So, the objective was to find a way to just put the HTML elements on the page, s
 * Support for Translate plugin
 * Inline errors with fields (read documentation for more info)
 * File uploads using Filepond
-
 
 ## Documentation
 Checkout our docs at:
