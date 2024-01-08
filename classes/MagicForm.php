@@ -9,16 +9,10 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use JosephCrowell\MagicForms\Classes\BackendHelpers;
-use Winter\Storm\Support\Facades\Config;
-use Winter\Storm\Exception\AjaxException;
 use JosephCrowell\MagicForms\Classes\FilePond\FilePond;
 use Winter\Storm\Support\Facades\Validator;
-use JosephCrowell\MagicForms\Classes\Mails\AutoResponse;
-use JosephCrowell\MagicForms\Classes\Mails\Notification;
-use Winter\Storm\Exception\ValidationException;
 
 abstract class MagicForm extends ComponentBase
 {
