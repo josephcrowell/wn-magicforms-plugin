@@ -11,13 +11,15 @@ class AddUnreadField extends Migration
     public function up()
     {
         if (!Schema::hasColumn('martin_forms_records', 'unread')) {
-            // CREATE FIELD
+            // CREATE FIELD SETTING EXISTING RECORDS TO READ
             Schema::table('martin_forms_records', function ($table) {
-                $table->boolean('unread')->default(1)->after('ip');
+                $table->boolean('unread')->default(0)->after('ip');
             });
 
-            // UPDATE EXISTING RECORDS TO READED
-            Record::where('unread', 1)->update(['unread' => 0]);
+            // UPDATE DEFAULT STATE TO UNREAD FOR NEW RECORDS
+            Schema::table('martin_forms_records', function ($table) {
+                $table->boolean('unread')->default(1)->change();
+            });
         }
     }
 
