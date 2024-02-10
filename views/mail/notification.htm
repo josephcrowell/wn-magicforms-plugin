@@ -1,8 +1,10 @@
 subject = "Magic Forms :: new form submited"
 ==
 Record #{{ id}}
+
 {% for label,value in data %}
-    {{ label|capitalize }}: {% if value is iterable %}{% for val in value %}{{ val|nl2br }}{% if not loop.last %}, {% endif %}{% endfor %}{% else %}{{ value|nl2br }}{% endif %}
+{{ label|capitalize }}: {% if value is iterable %}{% for val in value %}{{ val|nl2br }}{% if not loop.last %}, {% endif %}{% endfor %}{% else %}{{ value|nl2br }}{% endif %}
+
 {% endfor %}
 ==
 <h3>Record #{{ id}}</h3>
