@@ -1,5 +1,4 @@
 <?php
-
 namespace JosephCrowell\MagicForms\Classes\Traits;
 
 use JosephCrowell\MagicForms\Classes\BackendHelpers;
@@ -25,9 +24,12 @@ trait ReCaptcha
 
     private function getReCaptchaLang($lang = '')
     {
-        if (BackendHelpers::isTranslatePlugin()) {
+        if (BackendHelpers::isTranslatePlugin())
+        {
             $lang = '&hl=' . $this->activeLocale = Translator::instance()->getLocale();
-        } else {
+        }
+        else
+        {
             $lang = '&hl=' . $this->activeLocale = app()->getLocale();
         }
         return $lang;

@@ -1,5 +1,4 @@
 <?php
-
 namespace JosephCrowell\MagicForms\Components;
 
 use JosephCrowell\MagicForms\Classes\MagicForm;
@@ -17,13 +16,13 @@ class FilePondForm extends MagicForm
     public function defineProperties()
     {
         $local = [
-            'mail_uploads' => [
+            'mail_uploads'    => [
                 'title'             => 'josephcrowell.magicforms::lang.components.shared.mail_uploads.title',
                 'description'       => 'josephcrowell.magicforms::lang.components.shared.mail_uploads.description',
                 'type'              => 'checkbox',
                 'default'           => false,
                 'group'             => 'josephcrowell.magicforms::lang.components.shared.group_mail',
-                'showExternalParam' => false
+                'showExternalParam' => false,
             ],
             'uploader_enable' => [
                 'title'             => 'josephcrowell.magicforms::lang.components.shared.uploader_enable.title',

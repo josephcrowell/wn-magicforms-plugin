@@ -1,5 +1,4 @@
 <?php
-
 namespace JosephCrowell\MagicForms\Components;
 
 use JosephCrowell\MagicForms\Classes\MagicForm;

@@ -1,20 +1,21 @@
 <?php
-
 namespace JosephCrowell\MagicForms\Tests\Classes;
 
-use PluginTestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use System\Classes\PluginManager;
 use JosephCrowell\MagicForms\Classes\UnreadRecords;
 use JosephCrowell\MagicForms\Models\Record;
+use System\Classes\PluginManager;
+use System\Tests\Bootstrap\PluginTestCase;
 
-class UnreadRecordsTest extends PluginTestCase {
+class UnreadRecordsTest extends PluginTestCase
+{
 
     use RefreshDatabase;
 
     private $_record;
 
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         PluginManager::instance()->bootAll(true);
         Record::unguard();
@@ -23,7 +24,8 @@ class UnreadRecordsTest extends PluginTestCase {
     /**
      * @testdox Get total unread records with unread records
      */
-    public function testGetTotal() {
+    public function testGetTotal()
+    {
         $record = Record::create([
             'group' => 'test group',
         ]);
@@ -36,10 +38,11 @@ class UnreadRecordsTest extends PluginTestCase {
     /**
      * @testdox Get total unread records without unread records
      */
-    public function testGetTotalNoUnread() {
+    public function testGetTotalNoUnread()
+    {
         $record = Record::create([
             'group'  => 'test group',
-            'unread' => 0
+            'unread' => 0,
         ]);
         $unread = new UnreadRecords();
         $this->assertEquals(1, $record->id);

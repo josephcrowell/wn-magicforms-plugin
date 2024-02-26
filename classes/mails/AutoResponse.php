@@ -1,11 +1,10 @@
 <?php
-
 namespace JosephCrowell\MagicForms\Classes\Mails;
 
+use JosephCrowell\MagicForms\Classes\BackendHelpers;
 use JosephCrowell\MagicForms\Models\Record;
 use System\Models\MailTemplate;
 use Winter\Storm\Support\Facades\Mail;
-use JosephCrowell\MagicForms\Classes\BackendHelpers;
 
 class AutoResponse implements Mailable
 {
@@ -17,8 +16,8 @@ class AutoResponse implements Mailable
     public function __construct(array $properties, array $post, Record $record)
     {
         $this->properties = $properties;
-        $this->post = $post;
-        $this->record = $record;
+        $this->post       = $post;
+        $this->record     = $record;
     }
 
     public function send()
@@ -28,11 +27,12 @@ class AutoResponse implements Mailable
             'id'   => $this->record->id,
             'data' => $this->post,
             'ip'   => $this->record->ip,
-            'date' => $this->record->created_at
+            'date' => $this->record->created_at,
         ];
 
         // CHECK FOR CUSTOM SUBJECT
-        if (!empty($this->properties['mail_resp_subject'])) {
+        if (!empty($this->properties['mail_resp_subject']))
+        {
             $this->prepareCustomSubject();
         }
 
@@ -43,15 +43,18 @@ class AutoResponse implements Mailable
         $from     = isset($this->properties['mail_resp_from']) ? $this->properties['mail_resp_from'] : null;
         $subject  = isset($this->properties['mail_resp_subject']) ? $this->properties['mail_resp_subject'] : null;
 
-        if (filter_var($to, FILTER_VALIDATE_EMAIL) && filter_var($from, FILTER_VALIDATE_EMAIL)) {
+        if (filter_var($to, FILTER_VALIDATE_EMAIL) && filter_var($from, FILTER_VALIDATE_EMAIL))
+        {
             // CUSTOM TEMPLATE
             $template = $this->getTemplate();
 
             // SEND AUTORESPONSE EMAIL
-            Mail::sendTo($to, $template, $this->data, function ($message) use ($from, $name, $subject) {
+            Mail::sendTo($to, $template, $this->data, function ($message) use ($from, $name, $subject)
+            {
                 $message->from($from, $name);
 
-                if (isset($subject)) {
+                if (isset($subject))
+                {
                     $message->subject($subject);
                 }
             });
@@ -81,8 +84,8 @@ class AutoResponse implements Mailable
         $dateFormat = $this->properties['emails_date_format'] ?? 'Y-m-d';
 
         // DATA TO REPLACE
-        $id = $this->data['id'];
-        $ip = $this->data['ip'];
+        $id   = $this->data['id'];
+        $ip   = $this->data['ip'];
         $date = date($dateFormat);
 
         // REPLACE RECORD TOKENS IN SUBJECT
@@ -91,9 +94,11 @@ class AutoResponse implements Mailable
         $this->properties['mail_resp_subject'] = BackendHelpers::replaceToken('record.date', $date, $this->properties['mail_resp_subject']);
 
         // REPLACE FORM FIELDS TOKENS IN SUBJECT
-        foreach ($this->data['data'] as $key => $value) {
-            if (!is_array($value)) {
-                $token = 'form.' . $key;
+        foreach ($this->data['data'] as $key => $value)
+        {
+            if (!is_array($value))
+            {
+                $token                                 = 'form.' . $key;
                 $this->properties['mail_resp_subject'] = BackendHelpers::replaceToken($token, $value, $this->properties['mail_resp_subject']);
             }
         }

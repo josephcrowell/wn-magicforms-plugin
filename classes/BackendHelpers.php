@@ -1,5 +1,4 @@
 <?php
-
 namespace JosephCrowell\MagicForms\Classes;
 
 use Backend\Facades\Backend;
@@ -18,8 +17,10 @@ class BackendHelpers
     public static function getBackendURL(array $urls, string $default): string
     {
         $user = BackendAuth::getUser();
-        foreach ($urls as $permission => $URL) {
-            if ($user->hasAccess($permission)) {
+        foreach ($urls as $permission => $URL)
+        {
+            if ($user->hasAccess($permission))
+            {
                 return Backend::url($URL);
             }
         }
@@ -45,7 +46,8 @@ class BackendHelpers
      */
     public static function array_map_recursive($callback, $array)
     {
-        $func = function ($item) use (&$func, &$callback) {
+        $func = function ($item) use (&$func, &$callback)
+        {
             return is_array($item) ? array_map($func, $item) : call_user_func($callback, $item);
         };
 
@@ -62,12 +64,17 @@ class BackendHelpers
     public static function array2ul($data): string
     {
         $return = '';
-        foreach ($data as $index => $item) {
-            if (!is_string($item)) {
+        foreach ($data as $index => $item)
+        {
+            if (!is_string($item))
+            {
                 $return .= '<li>' . htmlspecialchars($index, ENT_QUOTES) . '<ul>' . self::array2ul($item) . "</ul></li>";
-            } else {
+            }
+            else
+            {
                 $return .= '<li>';
-                if (is_object($data)) {
+                if (is_object($data))
+                {
                     $return .= htmlspecialchars($index, ENT_QUOTES) . ' - ';
                 }
                 $return .= htmlspecialchars($item, ENT_QUOTES) . '</li>';
@@ -100,7 +107,7 @@ class BackendHelpers
      */
     public static function replaceToken(string $pattern, string $replacement = null, string $subject): string
     {
-        $pattern = '/{{\s*('.preg_quote($pattern, '/').')\s*}}/';
+        $pattern = '/{{\s*(' . preg_quote($pattern, '/') . ')\s*}}/';
         return preg_replace($pattern, $replacement, $subject);
     }
 }

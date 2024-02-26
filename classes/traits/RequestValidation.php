@@ -1,5 +1,4 @@
 <?php
-
 namespace JosephCrowell\MagicForms\Classes\Traits;
 
 use Illuminate\Support\Facades\Lang;
@@ -19,13 +18,14 @@ trait RequestValidation
      */
     private function checkCSRF()
     {
-        if (Config::get('cms.enableCsrfProtection') && (Session::token() != input('_token'))) {
+        if (Config::get('cms.enableCsrfProtection') && (Session::token() != input('_token')))
+        {
             throw new AjaxException([
                 '#' . $this->alias . '_forms_flash' => $this->renderPartial($this->flash_partial, [
                     'status'  => 'error',
                     'type'    => 'danger',
                     'content' => Lang::get('josephcrowell.magicforms::lang.components.shared.csrf_error'),
-                ])
+                ]),
             ]);
         }
     }
@@ -39,7 +39,8 @@ trait RequestValidation
     private function validateForm()
     {
         /** CONTINUE IF VALIDATION PASSES */
-        if ($this->validator->passes()) {
+        if ($this->validator->passes())
+        {
             return;
         }
 
@@ -47,12 +48,14 @@ trait RequestValidation
         $message = $this->property('messages_errors');
 
         /** TRANSLATE ERROR MESSAGE */
-        if (BackendHelpers::isTranslatePlugin()) {
+        if (BackendHelpers::isTranslatePlugin())
+        {
             $message = \Winter\Translate\Models\Message::trans($message);
         }
 
         /** RETURN VALIDATOR OBJECT IF INLINE ERRORS ARE ENABLED */
-        if ($this->property('inline_errors') == 'display') {
+        if ($this->property('inline_errors') == 'display')
+        {
             throw new ValidationException($this->validator);
         }
 
@@ -77,24 +80,27 @@ trait RequestValidation
     private function validateReCaptcha(array $post)
     {
         /** CONTINUE IF RECAPTCHA IS DISABLED */
-        if (!$this->isReCaptchaEnabled()) {
+        if (!$this->isReCaptchaEnabled())
+        {
             return;
         }
 
         /** PREPARE RECAPTCHA VALIDATION */
-        $rules   = ['g-recaptcha-response'           => 'recaptcha'];
+        $rules   = ['g-recaptcha-response' => 'recaptcha'];
         $err_msg = ['g-recaptcha-response.recaptcha' => Lang::get('josephcrowell.magicforms::lang.validation.recaptcha_error')];
 
         /** DO SECOND VALIDATION */
         $this->validator = Validator::make($post, $rules, $err_msg);
 
         /** CONTINUE IF VALIDATION PASSES */
-        if ($this->validator->passes()) {
+        if ($this->validator->passes())
+        {
             return;
         }
 
         /** RETURN VALIDATOR OBJECT IF INLINE ERRORS ARE ENABLED */
-        if ($this->property('inline_errors') == 'display') {
+        if ($this->property('inline_errors') == 'display')
+        {
             throw new ValidationException($this->validator);
         }
 
@@ -124,7 +130,8 @@ trait RequestValidation
         $response = ['#' . $this->alias . '_forms_flash' => $this->renderPartial($flash_partial, $params)];
 
         /** INCLUDE ERROR FIELDS IF REQUIRED */
-        if ($this->property('inline_errors') != 'disabled') {
+        if ($this->property('inline_errors') != 'disabled')
+        {
             $response['error_fields'] = $validator->messages();
         }
 

@@ -1,13 +1,12 @@
 <?php
-
 return [
 
-    'plugin' => [
+    'plugin'      => [
         'name'        => 'Magic Forms',
-        'description' => 'Create easy AJAX forms'
+        'description' => 'Create easy AJAX forms',
     ],
 
-    'menu' => [
+    'menu'        => [
         'label'    => 'Magic Forms',
         'records'  => ['label' => 'Records'],
         'exports'  => ['label' => 'Export'],
@@ -28,12 +27,12 @@ return [
                 'files'      => 'Attached Files',
                 'created_at' => 'Created',
             ],
-            'buttons' => [
+            'buttons'    => [
                 'read'       => 'Mark as Read',
                 'unread'     => 'Mark as Unread',
                 'gdpr_clean' => 'GDPR Clean',
             ],
-            'alerts' => [
+            'alerts'     => [
                 'gdpr_confirm' => "Are you sure you want to clean old records?\nThis action cannot be undone!",
                 'gdpr_success' => 'GDPR cleanup was executed successfully',
                 'gdpr_perms'   => 'You don\'t have permission to this feature',
@@ -60,12 +59,12 @@ return [
         ],
     ],
 
-    'components' => [
-        'generic_form' => [
+    'components'  => [
+        'generic_form'  => [
             'name'        => 'Generic AJAX Form',
             'description' => 'By default renders a generic form; override component HTML with your custom fields.',
         ],
-        'empty_form' => [
+        'empty_form'    => [
             'name'        => 'Empty AJAX Form',
             'description' => 'Create a empty template for your custom form; override component HTML.',
         ],
@@ -73,64 +72,64 @@ return [
             'name'        => 'Upload AJAX Form',
             'description' => 'Sample AJAX form with upload capabilities using FilePond.',
         ],
-        'shared' => [
-            'csrf_error'        => 'Form session expired! Please refresh the page.',
-            'recaptcha_warn'    => 'Warning: reCAPTCHA is not properly configured. Please, goto Backend > Settings > CMS > Magic Forms and configure.',
-            'group_validation'  => 'Form Validation',
-            'group_messages'    => 'Flash Messages',
-            'group_mail'        => 'Notifications Settings',
-            'group_mail_resp'   => 'Auto-Response Settings',
-            'group_settings'    => 'More Settings',
-            'group_security'    => 'Security',
-            'group_recaptcha'   => 'reCAPTCHA Settings',
-            'group_advanced'    => 'Advanced Settings',
-            'group_uploader'    => 'Uploader Settings',
-            'validation_req'    => 'The property is required',
-            'group'             => ['title' => 'Group', 'description' => 'Organize your forms with a custom group name. This option is useful when exporting data.'],
-            'rules'             => ['title' => 'Rules', 'description' => 'Set your own rules using Laravel validation'],
-            'rules_messages'    => ['title' => 'Rules Messages', 'description' => 'Use your own rules messages using Laravel validation'],
-            'custom_attributes' => ['title' => 'Custom Attributes', 'description' => 'Use your own custom attributes using Laravel validation'],
-            'messages_success'  => ['title' => 'Success', 'description' => 'Message when the form is successfully submitted', 'default' => 'Your form was successfully submitted'],
-            'messages_errors'   => ['title' => 'Errors', 'description' => 'Message when the form contains errors', 'default' => 'There were errors with your submission'],
-            'messages_partial'  => ['title' => 'Use Custom Partial', 'description' => 'Override flash messages with your custom partial inside your theme'],
-            'mail_enabled'      => ['title' => 'Send Notifications', 'description' => 'Send mail notifications on every form submitted'],
-            'mail_subject'      => ['title' => 'Subject', 'description' => 'Override default email subject'],
-            'mail_recipients'   => ['title' => 'Recipients', 'description' => 'Specify email recipients (add one address per line)'],
-            'mail_bcc'          => ['title' => 'BCC', 'description' => 'Send blind carbon copy to email recipients (add one address per line)'],
-            'mail_replyto'      => ['title' => 'ReplyTo Email Field', 'description' => 'Form field containing the email address of sender to be used as "ReplyTo"'],
-            'mail_template'     => ['title' => 'Mail Template', 'description' => 'Use custom mail template. Specify template code like "josephcrowell.magicforms::mail.notification" (found on Settings, Mail templates). Leave empty to use default.'],
-            'mail_uploads'      => ['title' => 'Send Uploads', 'description' => 'Send uploads as attachments'],
-            'mail_resp_enabled' => ['title' => 'Send Auto-Response', 'description' => 'Send an auto-response email to the person submitting the form'],
-            'mail_resp_field'   => ['title' => 'Email Field', 'description' => 'Form field containing the email address of the recipient of auto-response'],
-            'mail_resp_name'    => ['title' => 'Sender Name', 'description' => 'Name of auto-response email sender (e.g. John Doe)'],
-            'mail_resp_from'    => ['title' => 'Sender Address', 'description' => 'Email address of auto-response email sender (e.g. noreply@yourcompany.com)'],
-            'mail_resp_subject' => ['title' => 'Subject', 'description' => 'Override default email subject'],
-            'reset_form'        => ['title' => 'Reset Form', 'description' => 'Reset form after successfully submit'],
-            'redirect'          => ['title' => 'Redirect on Success', 'description' => 'Redirect to URL on successfully submit.'],
-            'inline_errors'     => ['title' => 'Inline errors', 'description' => 'Display inline errors. This requires extra code, check documentation for more info.', 'disabled' => 'Disabled', 'display' => 'Display errors', 'variable' => 'JS variable'],
-            'js_on_success'     => ['title' => 'JS on Success', 'description' => 'Execute custom JavaScript code when the form was successfully submitted. Don\'t use script tags.'],
-            'js_on_error'       => ['title' => 'JS on Error', 'description' => 'Execute custom JavaScript code when the form doesn\'t validate. Don\'t use script tags.'],
-            'allowed_fields'    => ['title' => 'Allowed Fields', 'description' => 'Specify which fields should be filtered and stored (add one field name per line)'],
-            'anonymize_ip'      => ['title' => 'Anonymize IP', 'description' => 'Don\'t store IP address', 'full' => 'Full', 'partial' => 'Partial', 'disabled' => 'Disabled'],
-            'sanitize_data'     => ['title' => 'Sanitize form data', 'description' => 'Sanitize form data and save result on database', 'disabled' => 'Disabled', 'htmlspecialchars' => 'Use htmlspecialchars'],
-            'recaptcha_enabled' => ['title' => 'Enable reCAPTCHA', 'description' => 'Insert the reCAPTCHA widget on your form'],
-            'recaptcha_theme'   => ['title' => 'Theme', 'description' => 'The color theme of the widget', 'light'  => 'Light', 'dark'    => 'Dark'],
-            'recaptcha_type'    => ['title' => 'Type', 'description' => 'The type of CAPTCHA to serve', 'image'  => 'Image', 'audio'   => 'Audio'],
-            'recaptcha_size'    => [
-                'title' => 'Size',
+        'shared'        => [
+            'csrf_error'         => 'Form session expired! Please refresh the page.',
+            'recaptcha_warn'     => 'Warning: reCAPTCHA is not properly configured. Please, goto Backend > Settings > CMS > Magic Forms and configure.',
+            'group_validation'   => 'Form Validation',
+            'group_messages'     => 'Flash Messages',
+            'group_mail'         => 'Notifications Settings',
+            'group_mail_resp'    => 'Auto-Response Settings',
+            'group_settings'     => 'More Settings',
+            'group_security'     => 'Security',
+            'group_recaptcha'    => 'reCAPTCHA Settings',
+            'group_advanced'     => 'Advanced Settings',
+            'group_uploader'     => 'Uploader Settings',
+            'validation_req'     => 'The property is required',
+            'group'              => ['title' => 'Group', 'description' => 'Organize your forms with a custom group name. This option is useful when exporting data.'],
+            'rules'              => ['title' => 'Rules', 'description' => 'Set your own rules using Laravel validation'],
+            'rules_messages'     => ['title' => 'Rules Messages', 'description' => 'Use your own rules messages using Laravel validation'],
+            'custom_attributes'  => ['title' => 'Custom Attributes', 'description' => 'Use your own custom attributes using Laravel validation'],
+            'messages_success'   => ['title' => 'Success', 'description' => 'Message when the form is successfully submitted', 'default' => 'Your form was successfully submitted'],
+            'messages_errors'    => ['title' => 'Errors', 'description' => 'Message when the form contains errors', 'default' => 'There were errors with your submission'],
+            'messages_partial'   => ['title' => 'Use Custom Partial', 'description' => 'Override flash messages with your custom partial inside your theme'],
+            'mail_enabled'       => ['title' => 'Send Notifications', 'description' => 'Send mail notifications on every form submitted'],
+            'mail_subject'       => ['title' => 'Subject', 'description' => 'Override default email subject'],
+            'mail_recipients'    => ['title' => 'Recipients', 'description' => 'Specify email recipients (add one address per line)'],
+            'mail_bcc'           => ['title' => 'BCC', 'description' => 'Send blind carbon copy to email recipients (add one address per line)'],
+            'mail_replyto'       => ['title' => 'ReplyTo Email Field', 'description' => 'Form field containing the email address of sender to be used as "ReplyTo"'],
+            'mail_template'      => ['title' => 'Mail Template', 'description' => 'Use custom mail template. Specify template code like "josephcrowell.magicforms::mail.notification" (found on Settings, Mail templates). Leave empty to use default.'],
+            'mail_uploads'       => ['title' => 'Send Uploads', 'description' => 'Send uploads as attachments'],
+            'mail_resp_enabled'  => ['title' => 'Send Auto-Response', 'description' => 'Send an auto-response email to the person submitting the form'],
+            'mail_resp_field'    => ['title' => 'Email Field', 'description' => 'Form field containing the email address of the recipient of auto-response'],
+            'mail_resp_name'     => ['title' => 'Sender Name', 'description' => 'Name of auto-response email sender (e.g. John Doe)'],
+            'mail_resp_from'     => ['title' => 'Sender Address', 'description' => 'Email address of auto-response email sender (e.g. noreply@yourcompany.com)'],
+            'mail_resp_subject'  => ['title' => 'Subject', 'description' => 'Override default email subject'],
+            'reset_form'         => ['title' => 'Reset Form', 'description' => 'Reset form after successfully submit'],
+            'redirect'           => ['title' => 'Redirect on Success', 'description' => 'Redirect to URL on successfully submit.'],
+            'inline_errors'      => ['title' => 'Inline errors', 'description' => 'Display inline errors. This requires extra code, check documentation for more info.', 'disabled' => 'Disabled', 'display' => 'Display errors', 'variable' => 'JS variable'],
+            'js_on_success'      => ['title' => 'JS on Success', 'description' => 'Execute custom JavaScript code when the form was successfully submitted. Don\'t use script tags.'],
+            'js_on_error'        => ['title' => 'JS on Error', 'description' => 'Execute custom JavaScript code when the form doesn\'t validate. Don\'t use script tags.'],
+            'allowed_fields'     => ['title' => 'Allowed Fields', 'description' => 'Specify which fields should be filtered and stored (add one field name per line)'],
+            'anonymize_ip'       => ['title' => 'Anonymize IP', 'description' => 'Don\'t store IP address', 'full' => 'Full', 'partial' => 'Partial', 'disabled' => 'Disabled'],
+            'sanitize_data'      => ['title' => 'Sanitize form data', 'description' => 'Sanitize form data and save result on database', 'disabled' => 'Disabled', 'htmlspecialchars' => 'Use htmlspecialchars'],
+            'recaptcha_enabled'  => ['title' => 'Enable reCAPTCHA', 'description' => 'Insert the reCAPTCHA widget on your form'],
+            'recaptcha_theme'    => ['title' => 'Theme', 'description' => 'The color theme of the widget', 'light' => 'Light', 'dark' => 'Dark'],
+            'recaptcha_type'     => ['title' => 'Type', 'description' => 'The type of CAPTCHA to serve', 'image' => 'Image', 'audio' => 'Audio'],
+            'recaptcha_size'     => [
+                'title'       => 'Size',
                 'description' => 'The size of the widget',
-                'normal' => 'Normal',
-                'compact' => 'Compact',
-                'invisible' => 'Invisible',
+                'normal'      => 'Normal',
+                'compact'     => 'Compact',
+                'invisible'   => 'Invisible',
             ],
             'skip_database'      => ['title' => 'Skip DB', 'description' => 'Don\'t store this form on database. Useful if you want to use events with your custom plugin.'],
             'emails_date_format' => ['title' => 'Date format on emails', 'description' => 'Set custom format for dates used on emails subjects.'],
             'uploader_enable'    => ['title' => 'Allow uploads', 'description' => 'Enable files uploading. You need to explicitly enable this option as a security measure.'],
             'uploader_filesize'  => ['title' => 'File size limit', 'description' => 'The maximum file size that can be uploaded. Ex: 10MB, 750KB.'],
-        ]
+        ],
     ],
 
-    'settings' => [
+    'settings'    => [
         'tabs'                    => ['general' => 'General', 'recaptcha' => 'reCAPTCHA', 'gdpr' => 'GDPR'],
         'section_flash_messages'  => 'Flash Messages',
         'global_messages_success' => ['label' => 'Global Success Message', 'comment' => '(This setting can be overridden from the component)', 'default' => 'Your form was successfully submitted'],
@@ -155,17 +154,17 @@ return [
         'gdpr_cleanup'    => 'Perform GDPR database cleanup',
     ],
 
-    'mails' => [
+    'mails'       => [
         'form_notification' => ['description' => 'Notify when a form is submitted'],
         'form_autoresponse' => ['description' => 'Auto-Response when a form is submitted'],
     ],
 
-    'validation' => [
-        'recaptcha_error' => 'Cannot validate reCAPTCHA field'
+    'validation'  => [
+        'recaptcha_error' => 'Cannot validate reCAPTCHA field',
     ],
 
-    'classes' => [
-        'GDPR' => [
+    'classes'     => [
+        'GDPR'     => [
             'alert_gdpr_disabled' => 'GDPR options are disabled',
             'alert_invalid_gdpr'  => 'Invalid GDPR days setting value',
         ],
@@ -173,7 +172,7 @@ return [
             'error_filesize' => 'File size not allowed',
             'error_filetype' => 'File type not allowed',
             'error_savefile' => 'Could not save file',
-        ]
-    ]
+        ],
+    ],
 
 ];

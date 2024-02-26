@@ -10,8 +10,10 @@ class CreateRecordsTable extends Migration
 {
     public function up()
     {
-        if (!Schema::hasTable('martin_forms_records')) {
-            Schema::create('martin_forms_records', function (Blueprint $table) {
+        if (!Schema::hasTable('martin_forms_records'))
+        {
+            Schema::create('martin_forms_records', function (Blueprint $table)
+            {
                 $table->engine = 'InnoDB';
                 $table->increments('id');
                 $table->text('form_data')->nullable();

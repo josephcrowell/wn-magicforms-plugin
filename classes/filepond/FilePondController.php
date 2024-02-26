@@ -1,13 +1,12 @@
 <?php
-
 namespace JosephCrowell\MagicForms\Classes\FilePond;
 
 use Illuminate\Http\Request;
-use JosephCrowell\MagicForms\Models\Settings;
+use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Response;
+use JosephCrowell\MagicForms\Models\Settings;
 use Winter\Storm\Filesystem\Definitions;
 use Winter\Storm\Support\Facades\Validator;
-use Illuminate\Routing\Controller as BaseController;
 
 class FilePondController extends BaseController
 {
@@ -35,13 +34,14 @@ class FilePondController extends BaseController
      */
     public function upload(Request $request): \Illuminate\Http\Response
     {
-        $field = $this->getUploadFieldName();
-        $input = $request->file($field);
+        $field      = $this->getUploadFieldName();
+        $input      = $request->file($field);
         $this->file = is_array($input) ? $input[0] : $input;
 
 
         /** VALIDATE UPLOAD FILE SIZE */
-        if ($this->checkInvalidSize()) {
+        if ($this->checkInvalidSize())
+        {
             $error = e(trans('josephcrowell.magicforms::lang.classes.FilePond.error_filesize'));
             return Response::make($error, 422, [
                 'Content-Type' => 'text/plain',
@@ -49,23 +49,26 @@ class FilePondController extends BaseController
         }
 
         /** VALIDATE UPLOAD FILE TYPE */
-        if ($this->checkInvalidFile()) {
+        if ($this->checkInvalidFile())
+        {
             $error = e(trans('josephcrowell.magicforms::lang.classes.FilePond.error_filetype'));
             return Response::make($error, 422, [
                 'Content-Type' => 'text/plain',
             ]);
         }
 
-        if ($input === null) {
+        if ($input === null)
+        {
             return Response::make($field . ' is required', 422, [
                 'Content-Type' => 'text/plain',
             ]);
         }
 
-        $filePath = $this->generateTempFilename();
+        $filePath      = $this->generateTempFilename();
         $filePathParts = pathinfo($filePath);
 
-        if (!$this->file->move($filePathParts['dirname'], $filePathParts['basename'])) {
+        if (!$this->file->move($filePathParts['dirname'], $filePathParts['basename']))
+        {
             $error = e(trans('josephcrowell.magicforms::lang.classes.FilePond.error_savefile'));
             return Response::make($error, 500, [
                 'Content-Type' => 'text/plain',
@@ -88,7 +91,8 @@ class FilePondController extends BaseController
     {
         $filePath = $this->filepond->getPathFromServerId($request->getContent());
 
-        if (unlink($filePath)) {
+        if (unlink($filePath))
+        {
             return Response::make('', 200, [
                 'Content-Type' => 'text/plain',
             ]);
@@ -120,7 +124,7 @@ class FilePondController extends BaseController
             $this->filepond->getTempPath(),
             DIRECTORY_SEPARATOR,
             str_random(8),
-            $this->file->getClientOriginalName()
+            $this->file->getClientOriginalName(),
         ]);
     }
 
@@ -168,7 +172,8 @@ class FilePondController extends BaseController
     {
         $settings = Settings::get('global_allowed_files', false);
 
-        if ($settings) {
+        if ($settings)
+        {
             return $settings;
         }
 

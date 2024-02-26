@@ -1,10 +1,7 @@
 <?php
-
 namespace JosephCrowell\MagicForms\Classes;
 
 use Cms\Classes\ComponentBase;
-use JosephCrowell\MagicForms\Models\Record;
-use JosephCrowell\MagicForms\Models\Settings;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Event;
@@ -12,6 +9,8 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
 use JosephCrowell\MagicForms\Classes\BackendHelpers;
 use JosephCrowell\MagicForms\Classes\FilePond\FilePond;
+use JosephCrowell\MagicForms\Models\Record;
+use JosephCrowell\MagicForms\Models\Settings;
 use Winter\Storm\Support\Facades\Validator;
 
 abstract class MagicForm extends ComponentBase
@@ -37,19 +36,23 @@ abstract class MagicForm extends ComponentBase
         $this->page['recaptcha_enabled']       = $this->isReCaptchaEnabled();
         $this->page['recaptcha_misconfigured'] = $this->isReCaptchaMisconfigured();
 
-        if ($this->property('uploader_enable')) {
+        if ($this->property('uploader_enable'))
+        {
             $this->page['allowed_filesize'] = Settings::get('global_allowed_filesize');
         }
 
-        if ($this->isReCaptchaEnabled()) {
+        if ($this->isReCaptchaEnabled())
+        {
             $this->loadReCaptcha();
         }
 
-        if ($this->isReCaptchaMisconfigured()) {
+        if ($this->isReCaptchaMisconfigured())
+        {
             $this->page['recaptcha_warn'] = Lang::get('josephcrowell.magicforms::lang.components.shared.recaptcha_warn');
         }
 
-        if ($this->property('inline_errors') == 'display') {
+        if ($this->property('inline_errors') == 'display')
+        {
             $this->addJs('assets/js/inline-errors.js');
         }
     }
@@ -68,7 +71,8 @@ abstract class MagicForm extends ComponentBase
         $this->checkCSRF();
 
         // LOAD TRANSLATOR PLUGIN
-        if (BackendHelpers::isTranslatePlugin()) {
+        if (BackendHelpers::isTranslatePlugin())
+        {
             $translator = \Winter\Translate\Classes\Translator::instance();
             $translator->loadLocaleFromSession();
             $locale = $translator->getLocale();
@@ -79,19 +83,22 @@ abstract class MagicForm extends ComponentBase
         $post = $this->preparePost();
 
         // VALIDATION PARAMETERS
-        $rules = (array)$this->property('rules');
-        $msgs  = (array)$this->property('rules_messages');
-        $custom_attributes = (array)$this->property('custom_attributes');
+        $rules             = (array) $this->property('rules');
+        $msgs              = (array) $this->property('rules_messages');
+        $custom_attributes = (array) $this->property('custom_attributes');
 
         // TRANSLATE CUSTOM ERROR MESSAGES
-        if (BackendHelpers::isTranslatePlugin()) {
-            foreach ($msgs as $rule => $msg) {
+        if (BackendHelpers::isTranslatePlugin())
+        {
+            foreach ($msgs as $rule => $msg)
+            {
                 $msgs[$rule] = \Winter\Translate\Models\Message::trans($msg);
             }
         }
 
         // ADD reCAPTCHA VALIDATION
-        if ($this->isReCaptchaEnabled() && $this->property('recaptcha_size') != 'invisible') {
+        if ($this->isReCaptchaEnabled() && $this->property('recaptcha_size') != 'invisible')
+        {
             $rules['g-recaptcha-response'] = 'required';
         }
 
@@ -99,7 +106,8 @@ abstract class MagicForm extends ComponentBase
         $this->validator = Validator::make($post, $rules, $msgs, $custom_attributes);
 
         // NICE reCAPTCHA FIELD NAME
-        if ($this->isReCaptchaEnabled()) {
+        if ($this->isReCaptchaEnabled())
+        {
             $fields_names = ['g-recaptcha-response' => 'reCAPTCHA'];
             $this->validator->setAttributeNames(array_merge($fields_names, $custom_attributes));
         }
@@ -116,27 +124,31 @@ abstract class MagicForm extends ComponentBase
         /** FIRE BEFORE SAVE EVENT */
         Event::fire('josephcrowell.magicforms.beforeSaveRecord', [&$post, $this]);
 
-        if (count($custom_attributes)) {
-            $post = collect($post)->mapWithKeys(function ($val, $key) use ($custom_attributes) {
+        if (count($custom_attributes))
+        {
+            $post = collect($post)->mapWithKeys(function ($val, $key) use ($custom_attributes)
+            {
                 return [array_get($custom_attributes, $key, $key) => $val];
             })->all();
         }
 
-        $record = new Record;
-        $record->ip        = $this->getIP();
+        $record             = new Record;
+        $record->ip         = $this->getIP();
         $record->created_at = date('Y-m-d H:i:s');
 
         // SAVE RECORD TO DATABASE
-        if (!$this->property('skip_database')) {
+        if (!$this->property('skip_database'))
+        {
             $record->form_data = json_encode($post, JSON_UNESCAPED_UNICODE);
-            if ($this->property('group') != '') {
+            if ($this->property('group') != '')
+            {
                 $record->group = $this->property('group');
             }
 
             // attach files
             $this->attachFiles($record);
 
-            $record->save(null, post('_session_key'));
+            $record->save([], post('_session_key'));
         }
 
         /** SEND NOTIFICATION & AUTORESPONSE EMAILS */
@@ -146,7 +158,8 @@ abstract class MagicForm extends ComponentBase
         Event::fire('josephcrowell.magicforms.afterSaveRecord', [&$post, $this, $record]);
 
         // CHECK FOR REDIRECT
-        if ($this->property('redirect')) {
+        if ($this->property('redirect'))
+        {
             return Redirect::to($this->property('redirect'));
         }
 
@@ -154,17 +167,20 @@ abstract class MagicForm extends ComponentBase
         $message = $this->property('messages_success');
 
         // LOOK FOR TRANSLATION
-        if (BackendHelpers::isTranslatePlugin()) {
+        if (BackendHelpers::isTranslatePlugin())
+        {
             $message = \Winter\Translate\Models\Message::trans($message);
         }
 
         // DISPLAY SUCCESS MESSAGE
-        return ['#' . $this->alias . '_forms_flash' => $this->renderPartial($this->flash_partial, [
-            'status'  => 'success',
-            'type'    => 'success',
-            'content' => $message,
-            'jscript' => $this->prepareJavaScript(),
-        ])];
+        return [
+            '#' . $this->alias . '_forms_flash' => $this->renderPartial($this->flash_partial, [
+                'status'  => 'success',
+                'type'    => 'success',
+                'content' => $message,
+                'jscript' => $this->prepareJavaScript(),
+            ]),
+        ];
     }
 
     private function prepareJavaScript()
@@ -172,17 +188,20 @@ abstract class MagicForm extends ComponentBase
         $code = false;
 
         /* SUCCESS JS */
-        if ($this->property('js_on_success') != '') {
+        if ($this->property('js_on_success') != '')
+        {
             $code .= $this->property('js_on_success');
         }
 
         /* RECAPTCHA JS */
-        if ($this->isReCaptchaEnabled()) {
+        if ($this->isReCaptchaEnabled())
+        {
             $code .= $this->renderPartial('@js/recaptcha.htm');
         }
 
         /* RESET FORM JS */
-        if ($this->property('reset_form')) {
+        if ($this->property('reset_form'))
+        {
             $params = ['id' => '#' . $this->alias . '_forms_flash'];
             $code .= $this->renderPartial('@js/reset-form.htm', $params);
         }
@@ -192,13 +211,15 @@ abstract class MagicForm extends ComponentBase
 
     private function getIP()
     {
-        if ($this->property('anonymize_ip') == 'full') {
+        if ($this->property('anonymize_ip') == 'full')
+        {
             return '(Not stored)';
         }
 
         $ip = Request::getClientIp();
 
-        if ($this->property('anonymize_ip') == 'partial') {
+        if ($this->property('anonymize_ip') == 'partial')
+        {
             return BackendHelpers::anonymizeIPv4($ip);
         }
 
@@ -209,16 +230,18 @@ abstract class MagicForm extends ComponentBase
     {
         $files = post('files', null);
 
-        if (!$files) {
+        if (!$files)
+        {
             return;
         }
 
-        foreach ($files as $file) {
+        foreach ($files as $file)
+        {
             $filepond = App::make(FilePond::class);
             $filePath = $filepond->getPathFromServerId($file);
 
             $record->files()->create([
-                'data' => $filePath
+                'data' => $filePath,
             ], post('_session_key'));
         }
     }

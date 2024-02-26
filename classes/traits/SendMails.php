@@ -1,5 +1,4 @@
 <?php
-
 namespace JosephCrowell\MagicForms\Classes\Traits;
 
 use Illuminate\Support\Facades\App;
@@ -16,11 +15,13 @@ trait SendMails
      */
     private function sendEmails(array $post, $record)
     {
-        if ($this->property('mail_enabled')) {
+        if ($this->property('mail_enabled'))
+        {
             $this->sendNotification($post, $record);
         }
 
-        if ($this->property('mail_resp_enabled')) {
+        if ($this->property('mail_resp_enabled'))
+        {
             $this->sendAutoresponse($post, $record);
         }
     }
@@ -34,7 +35,10 @@ trait SendMails
     private function sendNotification(array $post, $record)
     {
         $notification = App::makeWith(Notification::class, [
-            $this->getProperties(), $post, $record, $record->files
+            $this->getProperties(),
+            $post,
+            $record,
+            $record->files,
         ]);
 
         $notification->send();
@@ -49,7 +53,9 @@ trait SendMails
     private function sendAutoresponse(array $post, $record)
     {
         $autoresponse = App::makeWith(AutoResponse::class, [
-            $this->getProperties(), $post, $record
+            $this->getProperties(),
+            $post,
+            $record,
         ]);
 
         $autoresponse->send();

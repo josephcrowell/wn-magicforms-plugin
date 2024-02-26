@@ -1,5 +1,4 @@
 <?php
-
 namespace JosephCrowell\MagicForms\Models;
 
 use Backend\Facades\Backend;
@@ -14,7 +13,7 @@ class Record extends Model
     protected $dates = ['deleted_at'];
 
     public $attachMany = [
-        'files' => ['System\Models\File', 'public' => false]
+        'files' => ['System\Models\File', 'public' => false],
     ];
 
     public function getFormDataArrAttribute()
@@ -34,7 +33,8 @@ class Record extends Model
 
     public function filesList()
     {
-        return $this->files->map(function ($file) {
+        return $this->files->map(function ($file)
+        {
             return Backend::url('josephcrowell/magicforms/records/download', [$this->id, $file->id]);
         })->implode(',');
     }

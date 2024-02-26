@@ -1,22 +1,21 @@
 <?php
-
 namespace JosephCrowell\MagicForms\Controllers;
 
-use Backend\Facades\Backend;
-use JosephCrowell\MagicForms\Classes\GDPR;
 use Backend\Classes\Controller;
-use JosephCrowell\MagicForms\Models\Record;
+use Backend\Facades\Backend;
 use Backend\Facades\BackendMenu;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Lang;
-use JosephCrowell\MagicForms\Classes\UnreadRecords;
-use Winter\Storm\Support\Facades\Flash;
 use Illuminate\Support\Facades\Redirect;
+use JosephCrowell\MagicForms\Classes\GDPR;
+use JosephCrowell\MagicForms\Classes\UnreadRecords;
+use JosephCrowell\MagicForms\Models\Record;
+use Winter\Storm\Support\Facades\Flash;
 
 class Records extends Controller
 {
     public $implement = [
-        'Backend.Behaviors.ListController'
+        'Backend.Behaviors.ListController',
     ];
 
     public $listConfig = 'config_list.yaml';
@@ -33,7 +32,8 @@ class Records extends Controller
     {
         $record = Record::find($id);
 
-        if (!$record) {
+        if (!$record)
+        {
             Flash::error(e(trans('josephcrowell.magicforms::lang.controllers.records.error')));
             return Redirect::to(Backend::url('josephcrowell/magicforms/records'));
         }
@@ -47,7 +47,8 @@ class Records extends Controller
 
     public function onDelete()
     {
-        if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
+        if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds))
+        {
             Record::whereIn('id', $checkedIds)->delete();
         }
 
@@ -55,7 +56,7 @@ class Records extends Controller
 
         return [
             'counter' => ($counter != null) ? $counter : 0,
-            'list'    => $this->listRefresh()
+            'list'    => $this->listRefresh(),
         ];
     }
 
@@ -64,10 +65,13 @@ class Records extends Controller
         $id     = post('id');
         $record = Record::find($id);
 
-        if ($record) {
+        if ($record)
+        {
             $record->delete();
             Flash::success(e(trans('josephcrowell.magicforms::lang.controllers.records.deleted')));
-        } else {
+        }
+        else
+        {
             Flash::error(e(trans('josephcrowell.magicforms::lang.controllers.records.error')));
         }
 
@@ -79,24 +83,26 @@ class Records extends Controller
         $record = Record::findOrFail($record_id);
         $file   = $record->files->find($file_id);
 
-        if (!$file) {
+        if (!$file)
+        {
             App::abort(404, Lang::get('backend::lang.import_export.file_not_found_error'));
         }
 
         return response()->download($file->getLocalPath(), $file->getFilename());
-        exit();
     }
 
     public function listInjectRowClass($record, $definition = null)
     {
-        if ($record->unread) {
+        if ($record->unread)
+        {
             return 'new';
         }
     }
 
     public function onReadState()
     {
-        if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
+        if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds))
+        {
             $unread = (post('state') == 'read') ? 0 : 1;
             Record::whereIn('id', $checkedIds)->update(['unread' => $unread]);
         }
@@ -105,16 +111,19 @@ class Records extends Controller
 
         return [
             'counter' => ($counter != null) ? $counter : 0,
-            'list'    => $this->listRefresh()
+            'list'    => $this->listRefresh(),
         ];
     }
 
     public function onGDPRClean()
     {
-        if ($this->user->hasPermission(['josephcrowell.magicforms.gdpr_cleanup'])) {
+        if ($this->user->hasPermission(['josephcrowell.magicforms.gdpr_cleanup']))
+        {
             GDPR::cleanRecords();
             Flash::success(e(trans('josephcrowell.magicforms::lang.controllers.records.alerts.gdpr_success')));
-        } else {
+        }
+        else
+        {
             Flash::error(e(trans('josephcrowell.magicforms::lang.controllers.records.alerts.gdpr_perms')));
         }
 
@@ -122,7 +131,7 @@ class Records extends Controller
 
         return [
             'counter' => ($counter != null) ? $counter : 0,
-            'list'    => $this->listRefresh()
+            'list'    => $this->listRefresh(),
         ];
     }
 }

@@ -1,9 +1,8 @@
 <?php
-
 namespace JosephCrowell\MagicForms\Classes;
 
-use JosephCrowell\MagicForms\Models\Settings;
 use Illuminate\Support\Facades\Request;
+use JosephCrowell\MagicForms\Models\Settings;
 
 class ReCaptchaValidator
 {
