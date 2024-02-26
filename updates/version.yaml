@@ -143,3 +143,5 @@
   - rename_tables.php
 3.0.1:
   - add form id to forms using component alias so event listeners can be added
+3.0.2:
+  - fix migrations and improve notification template
