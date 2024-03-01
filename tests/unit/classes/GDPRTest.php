@@ -22,7 +22,7 @@ class GDPRTest extends PluginTestCase
         PluginManager::instance()->bootAll(true);
         Record::unguard();
         $this->_record = Record::create([
-            'group'      => 'test group',
+            'group' => 'test group',
             'created_at' => Carbon::now()->subDays(20),
             'updated_at' => Carbon::now()->subDays(20),
         ]);
@@ -35,7 +35,7 @@ class GDPRTest extends PluginTestCase
     {
         Settings::set([
             'gdpr_enable' => false,
-            'gdpr_days'   => 10,
+            'gdpr_days' => 10,
         ]);
         $gdpr = new GDPR();
         $gdpr->cleanRecords();
@@ -50,7 +50,7 @@ class GDPRTest extends PluginTestCase
     {
         Settings::set([
             'gdpr_enable' => true,
-            'gdpr_days'   => 10,
+            'gdpr_days' => 10,
         ]);
         $gdpr = new GDPR();
         $gdpr->cleanRecords();
@@ -65,7 +65,7 @@ class GDPRTest extends PluginTestCase
     {
         Settings::set([
             'gdpr_enable' => true,
-            'gdpr_days'   => 30,
+            'gdpr_days' => 30,
         ]);
         $gdpr = new GDPR();
         $gdpr->cleanRecords();
@@ -81,7 +81,7 @@ class GDPRTest extends PluginTestCase
     {
         Settings::set([
             'gdpr_enable' => true,
-            'gdpr_days'   => 'INVALID',
+            'gdpr_days' => 'INVALID',
         ]);
     }
 

@@ -16,12 +16,12 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'josephcrowell.magicforms::lang.plugin.name',
+            'name' => 'josephcrowell.magicforms::lang.plugin.name',
             'description' => 'josephcrowell.magicforms::lang.plugin.description',
-            'author'      => 'Joseph Crowell',
-            'icon'        => 'icon-magic',
-            'homepage'    => 'https://github.com/josephcrowell/wn-magicforms-plugin',
-            'replaces'    => [
+            'author' => 'Joseph Crowell',
+            'icon' => 'icon-magic',
+            'homepage' => 'https://github.com/josephcrowell/wn-magicforms-plugin',
+            'replaces' => [
                 'Martin.MagicForms' => '<=2.0.0',
             ],
         ];
@@ -29,34 +29,33 @@ class Plugin extends PluginBase
 
     public function registerNavigation()
     {
-        if (Settings::get('global_hide_button', false))
-        {
+        if (Settings::get('global_hide_button', false)) {
             return [];
         }
 
         return [
             'forms' => [
-                'label'       => 'josephcrowell.magicforms::lang.menu.label',
-                'icon'        => 'icon-magic',
-                'iconSvg'     => 'plugins/josephcrowell/magicforms/assets/imgs/icon.svg',
-                'url'         => BackendHelpers::getBackendURL(['josephcrowell.magicforms.access_records' => 'josephcrowell/magicforms/records', 'josephcrowell.magicforms.access_exports' => 'josephcrowell/magicforms/exports'], 'josephcrowell.magicforms.access_records'),
+                'label' => 'josephcrowell.magicforms::lang.menu.label',
+                'icon' => 'icon-magic',
+                'iconSvg' => 'plugins/josephcrowell/magicforms/assets/imgs/icon.svg',
+                'url' => BackendHelpers::getBackendURL(['josephcrowell.magicforms.access_records' => 'josephcrowell/magicforms/records', 'josephcrowell.magicforms.access_exports' => 'josephcrowell/magicforms/exports'], 'josephcrowell.magicforms.access_records'),
                 'permissions' => ['josephcrowell.magicforms.*'],
-                'sideMenu'    => [
-                    'records' => [
-                        'label'        => 'josephcrowell.magicforms::lang.menu.records.label',
-                        'icon'         => 'icon-database',
-                        'url'          => Backend::url('josephcrowell/magicforms/records'),
-                        'permissions'  => ['josephcrowell.magicforms.access_records'],
-                        'counter'      => UnreadRecords::getTotal(),
-                        'counterLabel' => 'Un-Read Messages',
+                'sideMenu' => [
+                        'records' => [
+                            'label' => 'josephcrowell.magicforms::lang.menu.records.label',
+                            'icon' => 'icon-database',
+                            'url' => Backend::url('josephcrowell/magicforms/records'),
+                            'permissions' => ['josephcrowell.magicforms.access_records'],
+                            'counter' => UnreadRecords::getTotal(),
+                            'counterLabel' => 'Un-Read Messages',
+                        ],
+                        'exports' => [
+                            'label' => 'josephcrowell.magicforms::lang.menu.exports.label',
+                            'icon' => 'icon-download',
+                            'url' => Backend::url('josephcrowell/magicforms/exports'),
+                            'permissions' => ['josephcrowell.magicforms.access_exports'],
+                        ],
                     ],
-                    'exports' => [
-                        'label'       => 'josephcrowell.magicforms::lang.menu.exports.label',
-                        'icon'        => 'icon-download',
-                        'url'         => Backend::url('josephcrowell/magicforms/exports'),
-                        'permissions' => ['josephcrowell.magicforms.access_exports'],
-                    ],
-                ],
             ],
         ];
     }
@@ -65,13 +64,13 @@ class Plugin extends PluginBase
     {
         return [
             'config' => [
-                'label'       => 'josephcrowell.magicforms::lang.menu.label',
+                'label' => 'josephcrowell.magicforms::lang.menu.label',
                 'description' => 'josephcrowell.magicforms::lang.menu.settings',
-                'category'    => SettingsManager::CATEGORY_CMS,
-                'icon'        => 'icon-magic',
-                'class'       => 'JosephCrowell\MagicForms\Models\Settings',
+                'category' => SettingsManager::CATEGORY_CMS,
+                'icon' => 'icon-magic',
+                'class' => 'JosephCrowell\MagicForms\Models\Settings',
                 'permissions' => ['josephcrowell.magicforms.access_settings'],
-                'order'       => 500,
+                'order' => 500,
             ],
         ];
     }
@@ -80,18 +79,18 @@ class Plugin extends PluginBase
     {
         return [
             'josephcrowell.magicforms.access_settings' => ['tab' => 'josephcrowell.magicforms::lang.permissions.tab', 'label' => 'josephcrowell.magicforms::lang.permissions.access_settings'],
-            'josephcrowell.magicforms.access_records'  => ['tab' => 'josephcrowell.magicforms::lang.permissions.tab', 'label' => 'josephcrowell.magicforms::lang.permissions.access_records'],
-            'josephcrowell.magicforms.access_exports'  => ['tab' => 'josephcrowell.magicforms::lang.permissions.tab', 'label' => 'josephcrowell.magicforms::lang.permissions.access_exports'],
-            'josephcrowell.magicforms.gdpr_cleanup'    => ['tab' => 'josephcrowell.magicforms::lang.permissions.tab', 'label' => 'josephcrowell.magicforms::lang.permissions.gdpr_cleanup'],
+            'josephcrowell.magicforms.access_records' => ['tab' => 'josephcrowell.magicforms::lang.permissions.tab', 'label' => 'josephcrowell.magicforms::lang.permissions.access_records'],
+            'josephcrowell.magicforms.access_exports' => ['tab' => 'josephcrowell.magicforms::lang.permissions.tab', 'label' => 'josephcrowell.magicforms::lang.permissions.access_exports'],
+            'josephcrowell.magicforms.gdpr_cleanup' => ['tab' => 'josephcrowell.magicforms::lang.permissions.tab', 'label' => 'josephcrowell.magicforms::lang.permissions.gdpr_cleanup'],
         ];
     }
 
     public function registerComponents()
     {
         return [
-            'JosephCrowell\MagicForms\Components\GenericForm'  => 'genericForm',
+            'JosephCrowell\MagicForms\Components\GenericForm' => 'genericForm',
             'JosephCrowell\MagicForms\Components\FilePondForm' => 'filepondForm',
-            'JosephCrowell\MagicForms\Components\EmptyForm'    => 'emptyForm',
+            'JosephCrowell\MagicForms\Components\EmptyForm' => 'emptyForm',
         ];
     }
 
@@ -105,16 +104,14 @@ class Plugin extends PluginBase
 
     public function register()
     {
-        $this->app->resolving('validator', function ()
-        {
+        $this->app->resolving('validator', function () {
             Validator::extend('recaptcha', 'JosephCrowell\MagicForms\Classes\ReCaptchaValidator@validateReCaptcha');
         });
     }
 
     public function registerSchedule($schedule)
     {
-        $schedule->call(function ()
-        {
+        $schedule->call(function () {
             GDPR::cleanRecords();
         })->daily();
     }

@@ -33,8 +33,7 @@ class Record extends Model
 
     public function filesList()
     {
-        return $this->files->map(function ($file)
-        {
+        return $this->files->map(function ($file) {
             return Backend::url('josephcrowell/magicforms/records/download', [$this->id, $file->id]);
         })->implode(',');
     }

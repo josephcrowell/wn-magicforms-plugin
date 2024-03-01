@@ -9,10 +9,8 @@ class AddGroupField extends Migration
 {
     public function up()
     {
-        if (!Schema::hasColumn('martin_forms_records', 'group'))
-        {
-            Schema::table('martin_forms_records', function ($table)
-            {
+        if (! Schema::hasColumn('martin_forms_records', 'group')) {
+            Schema::table('martin_forms_records', function ($table) {
                 $table->string('group')->default('(Empty)')->after('id');
             });
         }
@@ -20,10 +18,8 @@ class AddGroupField extends Migration
 
     public function down()
     {
-        if (Schema::hasColumn('martin_forms_records', 'group'))
-        {
-            Schema::table('martin_forms_records', function ($table)
-            {
+        if (Schema::hasColumn('martin_forms_records', 'group')) {
+            Schema::table('martin_forms_records', function ($table) {
                 $table->dropColumn('group');
             });
         }

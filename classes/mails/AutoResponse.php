@@ -16,45 +16,41 @@ class AutoResponse implements Mailable
     public function __construct(array $properties, array $post, Record $record)
     {
         $this->properties = $properties;
-        $this->post       = $post;
-        $this->record     = $record;
+        $this->post = $post;
+        $this->record = $record;
     }
 
     public function send()
     {
         // SET DEFAULT EMAIL DATA ARRAY
         $this->data = [
-            'id'   => $this->record->id,
+            'id' => $this->record->id,
             'data' => $this->post,
-            'ip'   => $this->record->ip,
+            'ip' => $this->record->ip,
             'date' => $this->record->created_at,
         ];
 
         // CHECK FOR CUSTOM SUBJECT
-        if (!empty($this->properties['mail_resp_subject']))
-        {
+        if (! empty($this->properties['mail_resp_subject'])) {
             $this->prepareCustomSubject();
         }
 
         // SET EMAIL PARAMETERS
         $response = isset($this->properties['mail_resp_field']) ? $this->properties['mail_resp_field'] : null;
-        $to       = isset($this->post[$response]) ? $this->post[$response] : null;
-        $name     = isset($this->properties['mail_resp_name']) ? $this->properties['mail_resp_name'] : null;
-        $from     = isset($this->properties['mail_resp_from']) ? $this->properties['mail_resp_from'] : null;
-        $subject  = isset($this->properties['mail_resp_subject']) ? $this->properties['mail_resp_subject'] : null;
+        $to = isset($this->post[$response]) ? $this->post[$response] : null;
+        $name = isset($this->properties['mail_resp_name']) ? $this->properties['mail_resp_name'] : null;
+        $from = isset($this->properties['mail_resp_from']) ? $this->properties['mail_resp_from'] : null;
+        $subject = isset($this->properties['mail_resp_subject']) ? $this->properties['mail_resp_subject'] : null;
 
-        if (filter_var($to, FILTER_VALIDATE_EMAIL) && filter_var($from, FILTER_VALIDATE_EMAIL))
-        {
+        if (filter_var($to, FILTER_VALIDATE_EMAIL) && filter_var($from, FILTER_VALIDATE_EMAIL)) {
             // CUSTOM TEMPLATE
             $template = $this->getTemplate();
 
             // SEND AUTORESPONSE EMAIL
-            Mail::sendTo($to, $template, $this->data, function ($message) use ($from, $name, $subject)
-            {
+            Mail::sendTo($to, $template, $this->data, function ($message) use ($from, $name, $subject) {
                 $message->from($from, $name);
 
-                if (isset($subject))
-                {
+                if (isset ($subject)) {
                     $message->subject($subject);
                 }
             });
@@ -66,9 +62,9 @@ class AutoResponse implements Mailable
      *
      * @return string
      */
-    public function getTemplate(): string
+    public function getTemplate() : string
     {
-        return !empty($this->properties['mail_resp_template']) && MailTemplate::findOrMakeTemplate($this->properties['mail_resp_template']) ?
+        return ! empty($this->properties['mail_resp_template']) && MailTemplate::findOrMakeTemplate($this->properties['mail_resp_template']) ?
             $this->properties['mail_resp_template'] :
             'josephcrowell.magicforms::mail.autoresponse';
     }
@@ -84,8 +80,8 @@ class AutoResponse implements Mailable
         $dateFormat = $this->properties['emails_date_format'] ?? 'Y-m-d';
 
         // DATA TO REPLACE
-        $id   = $this->data['id'];
-        $ip   = $this->data['ip'];
+        $id = $this->data['id'];
+        $ip = $this->data['ip'];
         $date = date($dateFormat);
 
         // REPLACE RECORD TOKENS IN SUBJECT
@@ -94,11 +90,9 @@ class AutoResponse implements Mailable
         $this->properties['mail_resp_subject'] = BackendHelpers::replaceToken('record.date', $date, $this->properties['mail_resp_subject']);
 
         // REPLACE FORM FIELDS TOKENS IN SUBJECT
-        foreach ($this->data['data'] as $key => $value)
-        {
-            if (!is_array($value))
-            {
-                $token                                 = 'form.' . $key;
+        foreach ($this->data['data'] as $key => $value) {
+            if (! is_array($value)) {
+                $token = 'form.' . $key;
                 $this->properties['mail_resp_subject'] = BackendHelpers::replaceToken($token, $value, $this->properties['mail_resp_subject']);
             }
         }

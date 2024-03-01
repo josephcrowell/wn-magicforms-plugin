@@ -32,16 +32,15 @@ class FilePondController extends BaseController
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function upload(Request $request): \Illuminate\Http\Response
+    public function upload(Request $request) : \Illuminate\Http\Response
     {
-        $field      = $this->getUploadFieldName();
-        $input      = $request->file($field);
+        $field = $this->getUploadFieldName();
+        $input = $request->file($field);
         $this->file = is_array($input) ? $input[0] : $input;
 
 
         /** VALIDATE UPLOAD FILE SIZE */
-        if ($this->checkInvalidSize())
-        {
+        if ($this->checkInvalidSize()) {
             $error = e(trans('josephcrowell.magicforms::lang.classes.FilePond.error_filesize'));
             return Response::make($error, 422, [
                 'Content-Type' => 'text/plain',
@@ -49,26 +48,23 @@ class FilePondController extends BaseController
         }
 
         /** VALIDATE UPLOAD FILE TYPE */
-        if ($this->checkInvalidFile())
-        {
+        if ($this->checkInvalidFile()) {
             $error = e(trans('josephcrowell.magicforms::lang.classes.FilePond.error_filetype'));
             return Response::make($error, 422, [
                 'Content-Type' => 'text/plain',
             ]);
         }
 
-        if ($input === null)
-        {
+        if ($input === null) {
             return Response::make($field . ' is required', 422, [
                 'Content-Type' => 'text/plain',
             ]);
         }
 
-        $filePath      = $this->generateTempFilename();
+        $filePath = $this->generateTempFilename();
         $filePathParts = pathinfo($filePath);
 
-        if (!$this->file->move($filePathParts['dirname'], $filePathParts['basename']))
-        {
+        if (! $this->file->move($filePathParts['dirname'], $filePathParts['basename'])) {
             $error = e(trans('josephcrowell.magicforms::lang.classes.FilePond.error_savefile'));
             return Response::make($error, 500, [
                 'Content-Type' => 'text/plain',
@@ -87,12 +83,11 @@ class FilePondController extends BaseController
      * @param Request $request
      * @return mixed
      */
-    public function delete(Request $request): \Illuminate\Http\Response
+    public function delete(Request $request) : \Illuminate\Http\Response
     {
         $filePath = $this->filepond->getPathFromServerId($request->getContent());
 
-        if (unlink($filePath))
-        {
+        if (unlink($filePath)) {
             return Response::make('', 200, [
                 'Content-Type' => 'text/plain',
             ]);
@@ -108,7 +103,7 @@ class FilePondController extends BaseController
      *
      * @return string
      */
-    private function getUploadFieldName(): string
+    private function getUploadFieldName() : string
     {
         return request()->headers->get('FILEPOND-FIELD');
     }
@@ -118,7 +113,7 @@ class FilePondController extends BaseController
      *
      * @return string
      */
-    private function generateTempFilename(): string
+    private function generateTempFilename() : string
     {
         return vsprintf('%s%s%s__%s', [
             $this->filepond->getTempPath(),
@@ -133,7 +128,7 @@ class FilePondController extends BaseController
      *
      * @return boolean
      */
-    private function checkInvalidSize(): bool
+    private function checkInvalidSize() : bool
     {
         $max_size = Settings::get('global_allowed_filesize', 10000);
 
@@ -151,7 +146,7 @@ class FilePondController extends BaseController
      *
      * @return boolean
      */
-    private function checkInvalidFile(): bool
+    private function checkInvalidFile() : bool
     {
         $field = $this->getUploadFieldName();
         $types = $this->allowedFileTypes();
@@ -168,12 +163,11 @@ class FilePondController extends BaseController
      *
      * @return string
      */
-    private function allowedFileTypes(): string
+    private function allowedFileTypes() : string
     {
         $settings = Settings::get('global_allowed_files', false);
 
-        if ($settings)
-        {
+        if ($settings) {
             return $settings;
         }
 

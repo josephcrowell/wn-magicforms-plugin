@@ -26,16 +26,14 @@ class FilePond
      */
     public function getPathFromServerId($serverId)
     {
-        if (!trim($serverId))
-        {
+        if (! trim($serverId)) {
             throw new InvalidPathException();
         }
 
         $filePath = Crypt::decryptString($serverId);
         $tempPath = $this->getTempPath();
 
-        if (!Str::startsWith($filePath, $tempPath))
-        {
+        if (! Str::startsWith($filePath, $tempPath)) {
             throw new InvalidPathException();
         }
 
@@ -46,8 +44,7 @@ class FilePond
     {
         $defaultPath = temp_path('magic-forms-temp');
 
-        if (File::exists($defaultPath))
-        {
+        if (File::exists($defaultPath)) {
             return $defaultPath;
         }
 

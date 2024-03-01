@@ -27,7 +27,7 @@ class BackendHelpersTest extends PluginTestCase
     {
         $this->_loginUser();
         $expect = Backend::url("josephcrowell/magicforms/records");
-        $bh     = new BackendHelpers();
+        $bh = new BackendHelpers();
         $this->assertEquals($expect, $bh->getBackendURL([
             'josephcrowell.magicforms.access_records' => 'josephcrowell/magicforms/records',
             'josephcrowell.magicforms.access_exports' => 'josephcrowell/magicforms/exports',
@@ -39,13 +39,13 @@ class BackendHelpersTest extends PluginTestCase
      */
     public function testArray2Ul()
     {
-        $list     = [
+        $list = [
             'item1' => 'Item 1',
             'item2' => ['item21' => 'Item 2.1', 'item22' => 'Item 2.2', 'item23' => 'Item 2.3'],
             'item3' => 'Item 3',
         ];
         $expected = '<li>Item 1</li><li>item2<ul><li>Item 2.1</li><li>Item 2.2</li><li>Item 2.3</li></ul></li><li>Item 3</li>';
-        $bh       = new BackendHelpers();
+        $bh = new BackendHelpers();
         $this->assertEquals($expected, $bh->array2ul($list));
     }
 
@@ -86,9 +86,9 @@ class BackendHelpersTest extends PluginTestCase
     private static function _loginUser()
     {
         $user = User::create([
-            'email'                 => 'testuser@testcompany.com',
-            'login'                 => 'testuser',
-            'password'              => 'superpassword',
+            'email' => 'testuser@testcompany.com',
+            'login' => 'testuser',
+            'password' => 'superpassword',
             'password_confirmation' => 'superpassword',
         ]);
         BackendAuth::login($user);

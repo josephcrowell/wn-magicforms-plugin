@@ -41,7 +41,7 @@ class UnreadRecordsTest extends PluginTestCase
     public function testGetTotalNoUnread()
     {
         $record = Record::create([
-            'group'  => 'test group',
+            'group' => 'test group',
             'unread' => 0,
         ]);
         $unread = new UnreadRecords();

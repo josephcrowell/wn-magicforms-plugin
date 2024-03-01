@@ -8,7 +8,7 @@ class EmptyForm extends MagicForm
     public function componentDetails()
     {
         return [
-            'name'        => 'josephcrowell.magicforms::lang.components.empty_form.name',
+            'name' => 'josephcrowell.magicforms::lang.components.empty_form.name',
             'description' => 'josephcrowell.magicforms::lang.components.empty_form.description',
         ];
     }

@@ -14,13 +14,11 @@ class BackendHelpers
      *
      * @return string
      */
-    public static function getBackendURL(array $urls, string $default): string
+    public static function getBackendURL(array $urls, string $default) : string
     {
         $user = BackendAuth::getUser();
-        foreach ($urls as $permission => $URL)
-        {
-            if ($user->hasAccess($permission))
-            {
+        foreach ($urls as $permission => $URL) {
+            if ($user->hasAccess($permission)) {
                 return Backend::url($URL);
             }
         }
@@ -32,7 +30,7 @@ class BackendHelpers
      *
      * @return boolean
      */
-    public static function isTranslatePlugin(): bool
+    public static function isTranslatePlugin() : bool
     {
         return class_exists('\Winter\Translate\Classes\Translator') && class_exists('\Winter\Translate\Models\Message') && class_exists('\Winter\Translate\Models\Locale');
     }
@@ -46,8 +44,7 @@ class BackendHelpers
      */
     public static function array_map_recursive($callback, $array)
     {
-        $func = function ($item) use (&$func, &$callback)
-        {
+        $func = function ($item) use (&$func, &$callback) {
             return is_array($item) ? array_map($func, $item) : call_user_func($callback, $item);
         };
 
@@ -61,20 +58,15 @@ class BackendHelpers
      *
      * @return string
      */
-    public static function array2ul($data): string
+    public static function array2ul($data) : string
     {
         $return = '';
-        foreach ($data as $index => $item)
-        {
-            if (!is_string($item))
-            {
+        foreach ($data as $index => $item) {
+            if (! is_string($item)) {
                 $return .= '<li>' . htmlspecialchars($index, ENT_QUOTES) . '<ul>' . self::array2ul($item) . "</ul></li>";
-            }
-            else
-            {
+            } else {
                 $return .= '<li>';
-                if (is_object($data))
-                {
+                if (is_object($data)) {
                     $return .= htmlspecialchars($index, ENT_QUOTES) . ' - ';
                 }
                 $return .= htmlspecialchars($item, ENT_QUOTES) . '</li>';
@@ -91,7 +83,7 @@ class BackendHelpers
      *
      * @return string Anonymized address
      */
-    public static function anonymizeIPv4(string $address): string
+    public static function anonymizeIPv4(string $address) : string
     {
         return inet_ntop(inet_pton($address) & inet_pton("255.255.255.0"));
     }
@@ -105,7 +97,7 @@ class BackendHelpers
      *
      * @return string
      */
-    public static function replaceToken(string $pattern, string $replacement = null, string $subject): string
+    public static function replaceToken(string $pattern, string $replacement = null, string $subject) : string
     {
         $pattern = '/{{\s*(' . preg_quote($pattern, '/') . ')\s*}}/';
         return preg_replace($pattern, $replacement, $subject);

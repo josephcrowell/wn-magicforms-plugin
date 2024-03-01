@@ -8,8 +8,7 @@ class UnreadRecords
 {
     public static function getTotal()
     {
-        if (Schema::hasTable('josephcrowell_magicforms_records'))
-        {
+        if (Schema::hasTable('josephcrowell_magicforms_records')) {
             $unread = Record::where('unread', 1)->count();
         }
 

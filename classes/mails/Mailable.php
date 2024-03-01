@@ -8,7 +8,7 @@ interface Mailable
      *
      * @return string
      */
-    public function getTemplate(): string;
+    public function getTemplate() : string;
 
     /**
      * Parse custom subject and modify using form variables and custom settings

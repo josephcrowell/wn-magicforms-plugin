@@ -36,26 +36,22 @@ class Exports extends Controller
         $records = Record::orderBy('created_at');
 
         // FILTER GROUPS
-        if (!empty($groups = post('Record.filter_groups')))
-        {
+        if (! empty($groups = post('Record.filter_groups'))) {
             $records->whereIn('group', $groups);
         }
 
         // FILTER DATE
-        if (!empty($date_after = post('Record.filter_date_after')))
-        {
+        if (! empty($date_after = post('Record.filter_date_after'))) {
             $records->whereDate('created_at', '>=', $date_after);
         }
 
         // FILTER DATE
-        if (!empty($date_before = post('Record.filter_date_before')))
-        {
+        if (! empty($date_before = post('Record.filter_date_before'))) {
             $records->whereDate('created_at', '<=', $date_before);
         }
 
         // FILTER DELETED
-        if (post('Record.options_deleted'))
-        {
+        if (post('Record.options_deleted')) {
             $records->withTrashed();
         }
 
@@ -63,14 +59,12 @@ class Exports extends Controller
         $csv = CsvWriter::createFromFileObject(new SplTempFileObject());
 
         // CHANGE DELIMTER
-        if (post('Record.options_delimiter'))
-        {
+        if (post('Record.options_delimiter')) {
             $csv->setDelimiter(';');
         }
 
         // SET UTF-8 Output
-        if (post('Record.options_utf'))
-        {
+        if (post('Record.options_utf')) {
             $csv->setOutputBOM(AbstractCsv::BOM_UTF8);
         }
 
@@ -78,28 +72,25 @@ class Exports extends Controller
         $headers = [];
 
         // METADATA HEADERS
-        if (post('Record.options_metadata'))
-        {
+        if (post('Record.options_metadata')) {
             $meta_headers = [
                 e(trans('josephcrowell.magicforms::lang.controllers.records.columns.id')),
                 e(trans('josephcrowell.magicforms::lang.controllers.records.columns.group')),
                 e(trans('josephcrowell.magicforms::lang.controllers.records.columns.ip')),
                 e(trans('josephcrowell.magicforms::lang.controllers.records.columns.created_at')),
             ];
-            $headers      = array_merge($meta_headers, $headers);
+            $headers = array_merge($meta_headers, $headers);
         }
 
         // ADD STORED FIELDS AS HEADER ROW IN CSV
         $filteredRecords = $records->get();
-        $record          = $filteredRecords->first();
-        if (isset($record))
-        {
+        $record = $filteredRecords->first();
+        if (isset($record)) {
             $headers = array_merge($headers, array_keys($record->form_data_arr));
         }
 
         // ADD FILES HEADER
-        if (post('Record.options_files'))
-        {
+        if (post('Record.options_files')) {
             $headers[] = e(trans('josephcrowell.magicforms::lang.controllers.records.columns.files'));
         }
 
@@ -107,28 +98,23 @@ class Exports extends Controller
         $csv->insertOne($headers);
 
         // WRITE CSV LINES
-        foreach ($records->get() as $row)
-        {
+        foreach ($records->get() as $row) {
             $data = (array) json_decode($row['form_data']);
 
             // IF DATA IS ARRAY CONVERT TO JSON STRING
-            foreach ($data as $field => $value)
-            {
-                if (is_array($value) || is_object($value))
-                {
+            foreach ($data as $field => $value) {
+                if (is_array($value) || is_object($value)) {
                     $data[$field] = json_encode($value);
                 }
             }
 
             // ADD METADATA IF NEEDED
-            if (post('Record.options_metadata'))
-            {
+            if (post('Record.options_metadata')) {
                 array_unshift($data, $row['id'], $row['group'], $row['ip'], $row['created_at']);
             }
 
             // ADD ATTACHED FILES
-            if (post('Record.options_files') && $row->files->count() > 0)
-            {
+            if (post('Record.options_files') && $row->files->count() > 0) {
                 $data[] = $row->filesList();
             }
 

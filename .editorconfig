@@ -1,0 +1,2 @@
+[*.php]
+php_diagnostic_php6602 = false

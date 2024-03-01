@@ -8,7 +8,7 @@ class GenericForm extends MagicForm
     public function componentDetails()
     {
         return [
-            'name'        => 'josephcrowell.magicforms::lang.components.generic_form.name',
+            'name' => 'josephcrowell.magicforms::lang.components.generic_form.name',
             'description' => 'josephcrowell.magicforms::lang.components.generic_form.description',
         ];
     }

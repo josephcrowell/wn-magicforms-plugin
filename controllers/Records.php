@@ -32,8 +32,7 @@ class Records extends Controller
     {
         $record = Record::find($id);
 
-        if (!$record)
-        {
+        if (! $record) {
             Flash::error(e(trans('josephcrowell.magicforms::lang.controllers.records.error')));
             return Redirect::to(Backend::url('josephcrowell/magicforms/records'));
         }
@@ -41,14 +40,13 @@ class Records extends Controller
         $record->unread = false;
         $record->save();
         $this->addCss('/plugins/josephcrowell/magicforms/assets/css/records.css');
-        $this->pageTitle      = e(trans('josephcrowell.magicforms::lang.controllers.records.view_title'));
+        $this->pageTitle = e(trans('josephcrowell.magicforms::lang.controllers.records.view_title'));
         $this->vars['record'] = $record;
     }
 
     public function onDelete()
     {
-        if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds))
-        {
+        if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
             Record::whereIn('id', $checkedIds)->delete();
         }
 
@@ -56,22 +54,19 @@ class Records extends Controller
 
         return [
             'counter' => ($counter != null) ? $counter : 0,
-            'list'    => $this->listRefresh(),
+            'list' => $this->listRefresh(),
         ];
     }
 
     public function onDeleteSingle()
     {
-        $id     = post('id');
+        $id = post('id');
         $record = Record::find($id);
 
-        if ($record)
-        {
+        if ($record) {
             $record->delete();
             Flash::success(e(trans('josephcrowell.magicforms::lang.controllers.records.deleted')));
-        }
-        else
-        {
+        } else {
             Flash::error(e(trans('josephcrowell.magicforms::lang.controllers.records.error')));
         }
 
@@ -81,10 +76,9 @@ class Records extends Controller
     public function download($record_id, $file_id)
     {
         $record = Record::findOrFail($record_id);
-        $file   = $record->files->find($file_id);
+        $file = $record->files->find($file_id);
 
-        if (!$file)
-        {
+        if (! $file) {
             App::abort(404, Lang::get('backend::lang.import_export.file_not_found_error'));
         }
 
@@ -93,16 +87,14 @@ class Records extends Controller
 
     public function listInjectRowClass($record, $definition = null)
     {
-        if ($record->unread)
-        {
+        if ($record->unread) {
             return 'new';
         }
     }
 
     public function onReadState()
     {
-        if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds))
-        {
+        if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
             $unread = (post('state') == 'read') ? 0 : 1;
             Record::whereIn('id', $checkedIds)->update(['unread' => $unread]);
         }
@@ -111,19 +103,16 @@ class Records extends Controller
 
         return [
             'counter' => ($counter != null) ? $counter : 0,
-            'list'    => $this->listRefresh(),
+            'list' => $this->listRefresh(),
         ];
     }
 
     public function onGDPRClean()
     {
-        if ($this->user->hasPermission(['josephcrowell.magicforms.gdpr_cleanup']))
-        {
+        if ($this->user->hasPermission(['josephcrowell.magicforms.gdpr_cleanup'])) {
             GDPR::cleanRecords();
             Flash::success(e(trans('josephcrowell.magicforms::lang.controllers.records.alerts.gdpr_success')));
-        }
-        else
-        {
+        } else {
             Flash::error(e(trans('josephcrowell.magicforms::lang.controllers.records.alerts.gdpr_perms')));
         }
 
@@ -131,7 +120,7 @@ class Records extends Controller
 
         return [
             'counter' => ($counter != null) ? $counter : 0,
-            'list'    => $this->listRefresh(),
+            'list' => $this->listRefresh(),
         ];
     }
 }
