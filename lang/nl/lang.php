@@ -33,7 +33,7 @@ return [
                 'gdpr_clean' => 'AVG opschoning uitvoeren',
             ],
             'alerts' => [
-                'gdpr_confirm' => "Weet u zeker dat u oude gegevens wilt wissen?\nDeze actie kan niet ongedaan worden gemaakt!",
+                'gdpr_confirm' => 'Weet u zeker dat u oude gegevens wilt wissen?\nDeze actie kan niet ongedaan worden gemaakt!',
                 'gdpr_success' => 'AVG-opschoning is met succes uitgevoerd',
                 'gdpr_perms' => 'Je hebt geen toestemming voor deze functie.',
             ],

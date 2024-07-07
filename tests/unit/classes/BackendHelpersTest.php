@@ -26,7 +26,7 @@ class BackendHelpersTest extends PluginTestCase
     public function testGetBackendUrl()
     {
         $this->_loginUser();
-        $expect = Backend::url("josephcrowell/magicforms/records");
+        $expect = Backend::url('josephcrowell/magicforms/records');
         $bh = new BackendHelpers();
         $this->assertEquals($expect, $bh->getBackendURL([
             'josephcrowell.magicforms.access_records' => 'josephcrowell/magicforms/records',

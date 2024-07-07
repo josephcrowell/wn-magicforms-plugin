@@ -63,7 +63,7 @@ class BackendHelpers
         $return = '';
         foreach ($data as $index => $item) {
             if (! is_string($item)) {
-                $return .= '<li>' . htmlspecialchars($index, ENT_QUOTES) . '<ul>' . self::array2ul($item) . "</ul></li>";
+                $return .= '<li>' . htmlspecialchars($index, ENT_QUOTES) . '<ul>' . self::array2ul($item) . '</ul></li>';
             } else {
                 $return .= '<li>';
                 if (is_object($data)) {
@@ -85,7 +85,7 @@ class BackendHelpers
      */
     public static function anonymizeIPv4(string $address) : string
     {
-        return inet_ntop(inet_pton($address) & inet_pton("255.255.255.0"));
+        return inet_ntop(inet_pton($address) & inet_pton('255.255.255.0'));
     }
 
     /**

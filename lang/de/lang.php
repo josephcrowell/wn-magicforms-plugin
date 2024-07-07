@@ -33,7 +33,7 @@ return [
                 'gdpr_clean' => 'DSVGO Aufräumung',
             ],
             'alerts' => [
-                'gdpr_confirm' => "Sind sie sicher dass Sie alte Einträge aufräumen wollen?\nDiese Aktion kann nicht wiederrufen werden!",
+                'gdpr_confirm' => 'Sind sie sicher dass Sie alte Einträge aufräumen wollen?\nDiese Aktion kann nicht wiederrufen werden!',
                 'gdpr_success' => 'DSVGO Aufräumung wurde erfolgreich ausgeführt',
                 'gdpr_perms' => 'Sie haben keine Berechtigung für diese Funktion.',
             ],

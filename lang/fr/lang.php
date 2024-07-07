@@ -30,7 +30,7 @@ return [
                 'gdpr_clean' => 'Nettoyage RGPD',
             ],
             'alerts' => [
-                'gdpr_confirm' => "Êtes-vous sûr de vouloir nettoyer les anciens enregistrements?\nCette action ne peut pas être annulée!",
+                'gdpr_confirm' => 'Êtes-vous sûr de vouloir nettoyer les anciens enregistrements?\nCette action ne peut pas être annulée!',
                 'gdpr_success' => 'Le nettoyage RGPD a été exécuté avec succès',
                 'gdpr_perms' => 'Vous n\'avez pas l\'autorisation pour utiliser cette fonctionnalité',
             ],
