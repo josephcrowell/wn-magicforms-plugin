@@ -145,3 +145,5 @@
   - add form id to forms using component alias so event listeners can be added
 3.0.2:
   - fix migrations and improve notification template
+3.0.3:
+  - fix unresolvable dependencies
