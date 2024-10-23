@@ -147,3 +147,5 @@
   - fix migrations and improve notification template
 3.0.3:
   - fix unresolvable dependencies
+3.0.4:
+  - fix unsightly non-functional close button
