@@ -149,3 +149,5 @@
   - fix unresolvable dependencies
 3.0.4:
   - fix unsightly non-functional close button
+3.0.5:
+  - updated french translation [thanks to Damien MATHIEU]
