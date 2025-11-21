@@ -26,12 +26,12 @@ class Notification implements Mailable
     public function send()
     {
         // CHECK IF THERE IS AT LEAST ONE MAIL ADDRESS
-        if (! isset($this->properties['mail_recipients'])) {
+        if (! isset($this->properties['mail_recipients']) || empty(array_filter($this->properties['mail_recipients']))) {
             $this->properties['mail_recipients'] = false;
         }
 
         // CHECK IF THERE IS AT LEAST ONE MAIL ADDRESS
-        if (! isset($this->properties['mail_bcc'])) {
+        if (! isset($this->properties['mail_bcc']) || empty(array_filter($this->properties['mail_bcc']))) {
             $this->properties['mail_bcc'] = false;
         }
 
