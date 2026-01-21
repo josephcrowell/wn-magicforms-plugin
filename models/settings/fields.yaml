@@ -29,9 +29,9 @@ tabs:
     global_allowed_filesize:
       label: Max upload size (in kilobytes)
       type: number
-      default: 10000
       tab: josephcrowell.magicforms::lang.settings.tabs.general
       span: left
+      min: 0
 
     global_allowed_files:
       label: Allowed file formats

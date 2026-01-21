@@ -130,7 +130,7 @@ class FilePondController extends BaseController
      */
     private function checkInvalidSize() : bool
     {
-        $max_size = Settings::get('global_allowed_filesize', 10000);
+        $max_size = Settings::get('global_allowed_filesize');
 
         $field = $this->getUploadFieldName();
 
