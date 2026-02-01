@@ -4,17 +4,13 @@ namespace JosephCrowell\MagicForms\Tests\Classes;
 use Backend\Facades\Backend;
 use Backend\Facades\BackendAuth;
 use Backend\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use JosephCrowell\MagicForms\Classes\BackendHelpers;
 use System\Classes\PluginManager;
 use System\Tests\Bootstrap\PluginTestCase;
 
 class BackendHelpersTest extends PluginTestCase
 {
-
-    use RefreshDatabase;
-
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         PluginManager::instance()->bootAll(true);
@@ -27,8 +23,7 @@ class BackendHelpersTest extends PluginTestCase
     {
         $this->_loginUser();
         $expect = Backend::url("josephcrowell/magicforms/records");
-        $bh = new BackendHelpers();
-        $this->assertEquals($expect, $bh->getBackendURL([
+        $this->assertEquals($expect, BackendHelpers::getBackendURL([
             'josephcrowell.magicforms.access_records' => 'josephcrowell/magicforms/records',
             'josephcrowell.magicforms.access_exports' => 'josephcrowell/magicforms/exports',
         ], 'josephcrowell.magicforms.access_records'));
@@ -45,8 +40,7 @@ class BackendHelpersTest extends PluginTestCase
             'item3' => 'Item 3',
         ];
         $expected = '<li>Item 1</li><li>item2<ul><li>Item 2.1</li><li>Item 2.2</li><li>Item 2.3</li></ul></li><li>Item 3</li>';
-        $bh = new BackendHelpers();
-        $this->assertEquals($expected, $bh->array2ul($list));
+        $this->assertEquals($expected, BackendHelpers::array2ul($list));
     }
 
     /**
@@ -54,9 +48,7 @@ class BackendHelpersTest extends PluginTestCase
      */
     public function testAnonymizeIPv4()
     {
-        $bh = new BackendHelpers();
-        $this->assertEquals('8.8.8.0', $bh->anonymizeIPv4('8.8.8.8'));
-
+        $this->assertEquals('8.8.8.0', BackendHelpers::anonymizeIPv4('8.8.8.8'));
     }
 
     /**
@@ -64,8 +56,7 @@ class BackendHelpersTest extends PluginTestCase
      */
     public function testReplaceTokenValid()
     {
-        $bh = new BackendHelpers();
-        $this->assertEquals('includes 50 string', $bh->replaceToken('record.id', '50', 'includes {{ record.id }} string'));
+        $this->assertEquals('includes 50 string', BackendHelpers::replaceToken('record.id', '50', 'includes {{ record.id }} string'));
     }
 
     /**
@@ -73,10 +64,8 @@ class BackendHelpersTest extends PluginTestCase
      */
     public function testReplaceTokenNoBraces()
     {
-        $bh = new BackendHelpers();
-        $this->assertEquals('includes record.id string', $bh->replaceToken('record.id', '50', 'includes record.id string'));
+        $this->assertEquals('includes record.id string', BackendHelpers::replaceToken('record.id', '50', 'includes record.id string'));
     }
-
 
     /**
      * Login backend user
@@ -93,5 +82,4 @@ class BackendHelpersTest extends PluginTestCase
         ]);
         BackendAuth::login($user);
     }
-
 }
