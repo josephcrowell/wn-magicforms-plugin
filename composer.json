@@ -31,8 +31,9 @@
         "source": "https://github.com/josephcrowell/wn-magicforms-plugin"
     },
     "require": {
-        "php": ">=7.2",
-        "composer/installers": "~1.0"
+        "php": "^8.0.2",
+        "composer/installers": "~1.11.0",
+        "winter/wn-system-module": "~1.2.0"
     },
     "replace": {
         "martin/wn-forms-plugin": "~2.0"
