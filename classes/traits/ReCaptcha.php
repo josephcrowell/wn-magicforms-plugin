@@ -24,12 +24,9 @@ trait ReCaptcha
 
     private function getReCaptchaLang($lang = '')
     {
-        if (BackendHelpers::isTranslatePlugin())
-        {
+        if (BackendHelpers::isTranslatePlugin()) {
             $lang = '&hl=' . $this->activeLocale = Translator::instance()->getLocale();
-        }
-        else
-        {
+        } else {
             $lang = '&hl=' . $this->activeLocale = app()->getLocale();
         }
         return $lang;
@@ -37,7 +34,16 @@ trait ReCaptcha
 
     private function loadReCaptcha()
     {
-        $this->addJs('https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' . $this->getReCaptchaLang(), ['async', 'defer']);
-        $this->addJs('assets/js/recaptcha.js');
+        $version = Settings::get('recaptcha_version') ?: 'v2';
+
+        if ($version == 'v3') {
+            $siteKey = Settings::get('recaptcha_site_key');
+            $this->addJs('https://www.google.com/recaptcha/api.js?render=' . $siteKey . $this->getReCaptchaLang(), ['async', 'defer']);
+            // No custom JS needed for generic load, but we might add a helper for token generation
+            // Actually, we'll put the token generation logic in the component partial or a separate js file specific to the form
+        } else {
+            $this->addJs('https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' . $this->getReCaptchaLang(), ['async', 'defer']);
+            $this->addJs('assets/js/recaptcha.js');
+        }
     }
 }

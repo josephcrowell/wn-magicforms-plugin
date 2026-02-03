@@ -45,6 +45,28 @@ tabs:
       path: $/josephcrowell/magicforms/models/settings/_recaptcha_help.htm
       tab: josephcrowell.magicforms::lang.settings.tabs.recaptcha
 
+    recaptcha_version:
+      label: josephcrowell.magicforms::lang.settings.recaptcha_version
+      type: dropdown
+      options:
+        v2: reCAPTCHA v2
+        v3: reCAPTCHA v3
+      default: v2
+      span: left
+      tab: josephcrowell.magicforms::lang.settings.tabs.recaptcha
+
+    recaptcha_score_threshold:
+        label: josephcrowell.magicforms::lang.settings.recaptcha_score_threshold
+        type: number
+        default: 0.5
+        span: right
+        tab: josephcrowell.magicforms::lang.settings.tabs.recaptcha
+        trigger:
+            action: show
+            field: recaptcha_version
+            condition: v3
+
+
     recaptcha_site_key:
       label: josephcrowell.magicforms::lang.settings.recaptcha_site_key
       span: left

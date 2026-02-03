@@ -1,5 +1,25 @@
 {% if (recaptcha_enabled) %}
-    <div id="{{ __SELF__ }}Recaptcha" class="g-recaptcha" data-sitekey="{{ __SELF__.settings.recaptcha_site_key }}" data-theme="{{ __SELF__.property('recaptcha_theme') }}" data-type="{{ __SELF__.property('recaptcha_type') }}" data-size="{{ __SELF__.property('recaptcha_size') }}"></div>
+{% if __SELF__.settings.recaptcha_version == 'v3' %}
+<input type="hidden" name="g-recaptcha-response" id="{{ __SELF__ }}Recaptcha" value="">
+<script>
+    (function () {
+        function refreshToken() {
+            grecaptcha.ready(function () {
+                grecaptcha.execute('{{ __SELF__.settings.recaptcha_site_key }}', { action: 'submit' }).then(function (token) {
+                    var el = document.getElementById('{{ __SELF__ }}Recaptcha');
+                    if (el) el.value = token;
+                });
+            });
+        }
+        refreshToken();
+        setInterval(refreshToken, 90 * 1000);
+    })();
+</script>
+{% else %}
+<div id="{{ __SELF__ }}Recaptcha" class="g-recaptcha" data-sitekey="{{ __SELF__.settings.recaptcha_site_key }}"
+    data-theme="{{ __SELF__.property('recaptcha_theme') }}" data-type="{{ __SELF__.property('recaptcha_type') }}"
+    data-size="{{ __SELF__.property('recaptcha_size') }}"></div>
+{% endif %}
 {% elseif (recaptcha_misconfigured) %}
-    <h5>{{ recaptcha_warn }}</h5>
+<h5>{{ recaptcha_warn }}</h5>
 {% endif %}

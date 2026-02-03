@@ -58,6 +58,7 @@ abstract class MagicForm extends ComponentBase
         return [
             'recaptcha_site_key' => Settings::get('recaptcha_site_key'),
             'recaptcha_secret_key' => Settings::get('recaptcha_secret_key'),
+            'recaptcha_version' => Settings::get('recaptcha_version') ?: 'v2',
         ];
     }
 
@@ -126,7 +127,7 @@ abstract class MagicForm extends ComponentBase
         $record->created_at = date('Y-m-d H:i:s');
 
         // SAVE RECORD TO DATABASE
-        if (! $this->property('skip_database')) {
+        if (!$this->property('skip_database')) {
             $record->form_data = json_encode($post, JSON_UNESCAPED_UNICODE);
             if ($this->property('group') != '') {
                 $record->group = $this->property('group');
@@ -210,7 +211,7 @@ abstract class MagicForm extends ComponentBase
     {
         $files = post('files', null);
 
-        if (! $files) {
+        if (!$files) {
             return;
         }
 
