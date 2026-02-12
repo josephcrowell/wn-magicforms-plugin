@@ -118,6 +118,7 @@ class Notification implements Mailable
         foreach ($this->data['data'] as $key => $value) {
             if (! is_array($value)) {
                 $token = 'form.' . $key;
+                $cleanValue = str_replace(['{', '}'], ['(', ')'], $value);
                 $this->properties['mail_subject'] = BH::replaceToken($token, $value, $this->properties['mail_subject']);
             }
         }
