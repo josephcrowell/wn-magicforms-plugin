@@ -151,3 +151,12 @@
   - fix unsightly non-functional close button
 3.0.5:
   - updated french translation [thanks to Damien MATHIEU]
+3.1.0:
+  - added reCAPTCHA v3 support with configurable score threshold
+  - reCAPTCHA v3 renders a hidden token field with automatic 90-second refresh instead of a visible checkbox
+  - reCAPTCHA version dropdown and score threshold settings added to plugin configuration
+  - FilePond controller return type declarations and field name from request headers
+  - Settings model refactored to use match expression for upload size KB conversion
+  - Export controller uses League\Csv\AbstractCsv constant for UTF-8 BOM
+  - Records and Exports controllers use e() wrapper for translatable strings
+  - added unit tests for BackendHelpers, GDPR cleanup, and UnreadRecords
