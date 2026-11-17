@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use JosephCrowell\MagicForms\Classes\GDPR;
 use JosephCrowell\MagicForms\Models\Record;
 use JosephCrowell\MagicForms\Models\Settings;
+use System\Behaviors\SettingsModel;
 use System\Classes\PluginManager;
 use System\Tests\Bootstrap\PluginTestCase;
 
@@ -15,6 +16,8 @@ class GDPRTest extends PluginTestCase
     public function setUp(): void
     {
         parent::setUp();
+        // The settings instance is cached statically and outlives each test's database.
+        SettingsModel::clearInternalCache();
         PluginManager::instance()->bootAll(true);
         Record::unguard();
         $this->_record = Record::create([
