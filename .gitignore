@@ -4,3 +4,5 @@ node_modules
 /*.lock
 /package-lock.json
 .VSCodeCounter
+.phpunit.result.cache
+.phpunit.cache
