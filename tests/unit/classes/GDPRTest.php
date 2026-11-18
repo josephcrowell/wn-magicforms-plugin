@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use JosephCrowell\MagicForms\Classes\GDPR;
 use JosephCrowell\MagicForms\Models\Record;
 use JosephCrowell\MagicForms\Models\Settings;
+use PHPUnit\Framework\Attributes\TestDox;
 use System\Behaviors\SettingsModel;
 use System\Classes\PluginManager;
 use System\Tests\Bootstrap\PluginTestCase;
@@ -27,9 +28,7 @@ class GDPRTest extends PluginTestCase
         ]);
     }
 
-    /**
-     * @testdox GDPR cleanup disabled
-     */
+    #[TestDox('GDPR cleanup disabled')]
     public function testCleanRecordsDisabled()
     {
         Settings::set([
@@ -41,9 +40,7 @@ class GDPRTest extends PluginTestCase
         $this->assertEquals(1, $totalRecords);
     }
 
-    /**
-     * @testdox GDPR cleanup with older records
-     */
+    #[TestDox('GDPR cleanup with older records')]
     public function testCleanRecordsWithOlder()
     {
         Settings::set([
@@ -55,9 +52,7 @@ class GDPRTest extends PluginTestCase
         $this->assertEquals(0, $totalRecords);
     }
 
-    /**
-     * @testdox GDPR cleanup without older records
-     */
+    #[TestDox('GDPR cleanup without older records')]
     public function testCleanRecordsWithoutOlder()
     {
         Settings::set([
@@ -69,9 +64,7 @@ class GDPRTest extends PluginTestCase
         $this->assertEquals(1, $totalRecords);
     }
 
-    /**
-     * @testdox GDPR cleanup with invalid days parameter
-     */
+    #[TestDox('GDPR cleanup with invalid days parameter')]
     public function testCleanRecordsInvalidDays()
     {
         $this->expectException(\Winter\Storm\Database\ModelException::class);

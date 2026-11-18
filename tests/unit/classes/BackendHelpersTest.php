@@ -5,6 +5,7 @@ use Backend\Facades\Backend;
 use Backend\Facades\BackendAuth;
 use Backend\Models\User;
 use JosephCrowell\MagicForms\Classes\BackendHelpers;
+use PHPUnit\Framework\Attributes\TestDox;
 use System\Classes\PluginManager;
 use System\Tests\Bootstrap\PluginTestCase;
 
@@ -16,9 +17,7 @@ class BackendHelpersTest extends PluginTestCase
         PluginManager::instance()->bootAll(true);
     }
 
-    /**
-     * @testdox Get backend URL
-     */
+    #[TestDox('Get backend URL')]
     public function testGetBackendUrl()
     {
         $this->_loginUser();
@@ -29,9 +28,7 @@ class BackendHelpersTest extends PluginTestCase
         ], 'josephcrowell.magicforms.access_records'));
     }
 
-    /**
-     * @testdox Convert PHP array to HTML list
-     */
+    #[TestDox('Convert PHP array to HTML list')]
     public function testArray2Ul()
     {
         $list = [
@@ -43,25 +40,19 @@ class BackendHelpersTest extends PluginTestCase
         $this->assertEquals($expected, BackendHelpers::array2ul($list));
     }
 
-    /**
-     * @testdox Anonymize IPv4 address
-     */
+    #[TestDox('Anonymize IPv4 address')]
     public function testAnonymizeIPv4()
     {
         $this->assertEquals('8.8.8.0', BackendHelpers::anonymizeIPv4('8.8.8.8'));
     }
 
-    /**
-     * @testdox Replace string containing curly braces
-     */
+    #[TestDox('Replace string containing curly braces')]
     public function testReplaceTokenValid()
     {
         $this->assertEquals('includes 50 string', BackendHelpers::replaceToken('record.id', '50', 'includes {{ record.id }} string'));
     }
 
-    /**
-     * @testdox Replace string not containing curly braces
-     */
+    #[TestDox('Replace string not containing curly braces')]
     public function testReplaceTokenNoBraces()
     {
         $this->assertEquals('includes record.id string', BackendHelpers::replaceToken('record.id', '50', 'includes record.id string'));

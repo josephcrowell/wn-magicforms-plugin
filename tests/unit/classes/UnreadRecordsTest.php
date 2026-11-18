@@ -3,6 +3,7 @@ namespace JosephCrowell\MagicForms\Tests\Classes;
 
 use JosephCrowell\MagicForms\Classes\UnreadRecords;
 use JosephCrowell\MagicForms\Models\Record;
+use PHPUnit\Framework\Attributes\TestDox;
 use System\Classes\PluginManager;
 use System\Tests\Bootstrap\PluginTestCase;
 
@@ -17,9 +18,7 @@ class UnreadRecordsTest extends PluginTestCase
         Record::unguard();
     }
 
-    /**
-     * @testdox Get total unread records with unread records
-     */
+    #[TestDox('Get total unread records with unread records')]
     public function testGetTotal()
     {
         $record = Record::create([
@@ -30,9 +29,7 @@ class UnreadRecordsTest extends PluginTestCase
         $this->assertEquals(1, UnreadRecords::getTotal());
     }
 
-    /**
-     * @testdox Get total unread records without unread records
-     */
+    #[TestDox('Get total unread records without unread records')]
     public function testGetTotalNoUnread()
     {
         $record = Record::create([
