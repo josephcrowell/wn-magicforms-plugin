@@ -160,3 +160,8 @@
   - Export controller uses League\Csv\AbstractCsv constant for UTF-8 BOM
   - Records and Exports controllers use e() wrapper for translatable strings
   - added unit tests for BackendHelpers, GDPR cleanup, and UnreadRecords
+3.1.1:
+  - allow installation on Winter CMS 1.3
+  - PHPUnit configuration moved to PHPUnit 11
+  - fixed GDPR tests failing when run after other tests
+  - tests use TestDox attributes instead of doc-comment metadata
